@@ -1,19 +1,70 @@
-﻿.fixed-top-nav {
+﻿$nav-bar-height: 2.5rem !global;
+
+.fixed-top-nav {
+  $nav-bar-padding: 0.3rem;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   position: fixed;
   top: 0px;
   left: 0px;
   margin: 0px;
   width: 100%;
-  height: 2rem;
+  height: $nav-bar-height;
   background-color: #bb2e29;
+  z-index: 1;
+
+  a {
+    margin: 0 auto;
+    padding: $nav-bar-padding;
+    color: white;
+    width: 16.6666%;
+    text-decoration: none;
+    text-align: center;
+    line-height: $nav-bar-height - 2 * $nav-bar-padding;
+    font-size: $nav-bar-height - 2 * $nav-bar-padding;
+
+    span.bordered-text {
+      $border-thickness: 0.15rem;
+      border: $border-thickness solid white;
+      border-radius: ($nav-bar-height - 2 * $nav-bar-padding)/2;
+      width: $nav-bar-height - 2 * $nav-bar-padding;
+      height: $nav-bar-height - 2 * $nav-bar-padding;
+      display: inline-block;
+      vertical-align: text-top;
+      position: relative;
+
+      span {
+        height: $nav-bar-height - 2 * $nav-bar-padding;
+        width: $nav-bar-height - 2 * $nav-bar-padding;
+        line-height: $nav-bar-height - 2 * $nav-bar-padding;
+        font-size: $nav-bar-height - 2 * $nav-bar-padding - 2 * $border-thickness;
+        display: inline-block;
+        vertical-align: text-top;
+        position: absolute;
+        left: - $border-thickness;
+        top: - $border-thickness;
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: #d23732;
+      }
+    }
+
+    &.active {
+      color: #bb2e29;
+      background: white;
+
+      span.bordered-text {
+        border-color: #bb2e29;
+      }
+    }
+  }
 }
 
-.fixed-top-nav a {
-  margin: auto;
-}
-
-.fixed-top-nav a:hover {
-  margin: auto;
+.fixed-top-nav-placeholder {
+  height: $nav-bar-height;
+  display: block;
 }

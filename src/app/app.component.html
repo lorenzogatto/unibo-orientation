@@ -1,7 +1,26 @@
 ﻿<nav class="fixed-top-nav">
-  <a>Home</a>
-  <a>Lista corsi</a>
-  <a>Questionario</a>
-  <a>Domande</a>
-  <a>Contatti</a>
+  <a routerLink="/home" routerLinkActive="active">
+    <i class="fa fa-home" aria-hidden="true"></i>
+  </a>
+  <a href="todo.com">
+    <i class="fa fa-list" aria-hidden="true"></i>
+  </a>
+  <a href="todo.com">
+    <span class="bordered-text"><span>Q</span></span>
+  </a>
+  <a href="todo.com">
+    <span class="bordered-text"><span>?</span></span>
+  </a>
+  <a routerLink="/contacts" routerLinkActive="active">
+    <span class="bordered-text"><span style="font-family:serif">i</span></span>
+  </a>
+  <a href="todo.com">
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+  </a>
 </nav>
+<div>
+  <div class="fixed-top-nav-placeholder"></div>
+  <div class="container" style="width: 90%;margin:auto;" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);">
+    <router-outlet></router-outlet>
+  </div>
+</div>
