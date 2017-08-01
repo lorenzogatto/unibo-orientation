@@ -2,6 +2,9 @@
 import { Router } from "@angular/router";
 
 let urls: string[] = ['/home',
+    '/courses',
+    '/questionnaire',
+    '/questions',
     '/contacts'
 ];
 
@@ -17,8 +20,8 @@ export class AppComponent {
         this.router = router;
     }
     swipe(direction: string, event) {
+        //alert(event.pointerType);
         console.log(event);
-        //event.preventDefault();
         let index = urls.findIndex((e) => e === this.router.url);
         if (index === -1) {
             console.log("Url not found in array");

@@ -2,22 +2,24 @@
   <a routerLink="/home" routerLinkActive="active">
     <i class="fa fa-home" aria-hidden="true"></i>
   </a>
-  <a href="todo.com">
+  <a routerLink="/courses" routerLinkActive="active">
     <i class="fa fa-list" aria-hidden="true"></i>
   </a>
-  <a href="todo.com">
+  <a routerLink="/questionnaire"  routerLinkActive="active">
     <span class="bordered-text"><span>Q</span></span>
   </a>
-  <a href="todo.com">
+  <a routerLink="/questions"  routerLinkActive="active">
     <span class="bordered-text"><span>?</span></span>
   </a>
   <a routerLink="/contacts" routerLinkActive="active">
-    <span class="bordered-text"><span style="font-family:serif">i</span></span>
+    <span class="bordered-text"><span style="font-family:Georgia, serif">i</span></span>
   </a>
-  <a href="todo.com">
+  <a routerLink="todo.com">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
   </a>
 </nav>
+<!--This div listens to swipe events that are external to other divs -->
+<div style="position:fixed;width: 100%;height:100%" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);"></div>
 <div>
   <div class="fixed-top-nav-placeholder"></div>
   <div class="container" style="width: 90%;margin:auto;" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);">

@@ -46,7 +46,7 @@
         top: - $border-thickness;
       }
     }
-
+    //it does not work on firefox http://caniuse.com/#feat=css-media-interaction
     @media (hover: hover) {
       &:hover {
         background-color: #d23732;
