@@ -9,15 +9,23 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 import { CoursesComponent } from "./courses.component";
 import { QuestionnaireComponent } from "./questionnaire.component";
 import { QuestionsComponent } from "./questions.component";
+import { HammerInstance } from "@angular/platform-browser/src/dom/events/hammer_gestures";
+import "hammerjs";
+
+
+delete Hammer.defaults.cssProps.userSelect;
 export class MyHammerConfig extends HammerGestureConfig {
     overrides = <any>{
         'swipe': { velocity: 0.4, threshold: 10 }, // override default settings
         'pinch': { enable: false },
         'rotate': { enable: false },
     };
-    cssProps = {
-        'userselect': 'auto'
-    };
+    /*buildHammer(element: HTMLElement): HammerInstance {
+        let mc = new Hammer(element, { touchAction: 'pan-y' });
+        mc.on('pinch', e => { alert(e);})
+        return mc;
+    }*/
+
 }
 
 @NgModule({
