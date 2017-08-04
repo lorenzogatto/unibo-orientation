@@ -1,0 +1,1 @@
+/*to use ng serve along as node.js server for api, use ng serve --proxy-config proxy-conf.json*/

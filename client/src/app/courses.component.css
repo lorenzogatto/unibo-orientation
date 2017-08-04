@@ -1,0 +1,39 @@
+button.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 0.4rem;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1rem; }
+  button.accordion.school {
+    padding: 0.5rem;
+    font-size: 1.05rem; }
+  button.accordion.active, button.accordion:hover {
+    background-color: #ddd; }
+  button.accordion > .toggle {
+    color: #777; }
+  button.accordion > .toggle:before {
+    content: '\002B';
+    font-weight: bold;
+    float: left;
+    margin-right: 0.4rem;
+    font-family: "Lucida Console", Monaco, monospace; }
+  button.accordion.school > .toggle:before {
+    margin-right: 0.5rem; }
+  button.accordion.active > .toggle:before {
+    content: "\2212"; }
+
+div.panel {
+  padding: 0 0 0 1rem;
+  background-color: white;
+  display: none;
+  overflow: hidden; }
+
+div.panel.course-info {
+  font-size: 0.95rem;
+  padding: 0.4rem 0.5rem 0.5rem 1.4rem; }
+
+/*# sourceMappingURL=courses.component.css.map */

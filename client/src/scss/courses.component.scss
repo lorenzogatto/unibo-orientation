@@ -1,0 +1,56 @@
+﻿//https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_symbol
+button.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 0.4rem;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1rem;
+
+  &.school {
+    padding: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  &.active, &:hover {
+    background-color: #ddd;
+  }
+
+  & > .toggle {
+    color: #777;
+  }
+
+  & > .toggle:before {
+    content: '\002B';
+    font-weight: bold;
+    float: left;
+    margin-right: 0.4rem;
+    font-family: "Lucida Console", Monaco, monospace;
+  }
+
+  &.school > .toggle:before {
+    margin-right: 0.5rem;
+  }
+
+
+  &.active > .toggle:before {
+    content: "\2212";
+  }
+}
+
+div.panel {
+    padding: 0 0 0 1rem;
+    background-color: white;
+    //max-height: 0;
+    display: none;
+    overflow: hidden;
+    //transition: max-height 0.5s ease-out;
+}
+
+div.panel.course-info {
+  font-size: 0.95rem;
+  padding: 0.4rem 0.5rem 0.5rem 1.4rem;
+}

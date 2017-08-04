@@ -11,6 +11,8 @@ import { QuestionnaireComponent } from "./questionnaire.component";
 import { QuestionsComponent } from "./questions.component";
 import { HammerInstance } from "@angular/platform-browser/src/dom/events/hammer_gestures";
 import "hammerjs";
+import { CourseService } from "./course.service";
+import { HttpModule } from "@angular/http";
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -39,12 +41,13 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   imports: [
       BrowserModule,
-      AppRoutingModule
+      AppRoutingModule,
+      HttpModule
   ],
   providers: [{
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
-  } ],
+  }, CourseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
