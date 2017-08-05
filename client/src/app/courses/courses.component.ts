@@ -27,9 +27,9 @@ export class CoursesComponent implements OnInit {
                 console.log("Errore " + err)
             });
     }
-    accordionClick(event) {
+    accordionClick(event: Event) {
         console.log(event);
-        let button = event.toElement;
+        let button: any = event.target;
         button.classList.toggle("active");
         var panel = button.nextElementSibling;
         var xd: any = $(panel)

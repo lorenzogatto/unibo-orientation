@@ -2,17 +2,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { ContactsComponent } from "./contacts.component";
-import { PresentationComponent } from "./presentation.component";
+import { ContactsComponent } from "./contacts/contacts.component";
+import { PresentationComponent } from "./presentation/presentation.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { CoursesComponent } from "./courses.component";
-import { QuestionnaireComponent } from "./questionnaire.component";
-import { QuestionsComponent } from "./questions.component";
+import { CoursesComponent } from "./courses/courses.component";
+import { QuestionnaireComponent } from "./questionnaire/questionnaire.component";
+import { QuestionsComponent } from "./forum/questions.component";
 import { HammerInstance } from "@angular/platform-browser/src/dom/events/hammer_gestures";
 import "hammerjs";
-import { CourseService } from "./course.service";
+import { CourseService } from "./courses/course.service";
 import { HttpModule } from "@angular/http";
+import { QuestionnaireHomeComponent } from "./questionnaire/home/questionnaire-home.component";
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -36,6 +37,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       PresentationComponent,
       CoursesComponent,
       QuestionnaireComponent,
+      QuestionnaireHomeComponent,
       QuestionsComponent,
       ContactsComponent
   ],

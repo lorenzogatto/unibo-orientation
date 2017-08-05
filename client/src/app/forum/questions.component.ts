@@ -2,8 +2,8 @@
 
 @Component({
     selector: 'questions',
-    templateUrl: './presentation.component.html',
-    styleUrls: ['presentation.component.css']
+    templateUrl: '../presentation/presentation.component.html',
+    styleUrls: []
 })
 export class QuestionsComponent {
 }

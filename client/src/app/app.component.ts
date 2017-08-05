@@ -22,7 +22,7 @@ export class AppComponent {
     swipe(direction: string, event) {
         //alert(event.pointerType);
         console.log(event);
-        let index = urls.findIndex((e) => e === this.router.url);
+        let index = urls.findIndex((e) => this.router.url.startsWith(e));
         if (index === -1) {
             console.log("Url not found in array");
             return;

@@ -3,7 +3,7 @@
 @Component({
     selector: 'contacts',
     template: '<br/><br/><br/><br/><br/><br/><br/><br/>contatti',
-    styleUrls: ['./app.component.css']
+    styleUrls: []
 })
 export class ContactsComponent {
 }

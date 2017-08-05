@@ -20,7 +20,8 @@ button.accordion {
     font-weight: bold;
     float: left;
     margin-right: 0.4rem;
-    font-family: "Lucida Console", Monaco, monospace; }
+    font-family: "Lucida Console", Monaco, monospace;
+    text-shadow: 0.05rem 0 0 #000, 0 -0.05rem 0 #000, 0 0.05rem 0 #000, -0.05rem 0 0 #000; }
   button.accordion.school > .toggle:before {
     margin-right: 0.5rem; }
   button.accordion.active > .toggle:before {
