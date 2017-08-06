@@ -14,15 +14,15 @@
   <a routerLink="/contacts" routerLinkActive="active">
     <span class="bordered-text"><span style="font-family:Georgia, serif" class="notranslate">i</span></span>
   </a>
-  <a routerLink="todo.com">
+  <a routerLink="/user/login" [ngClass]="{active: router.url.indexOf('/user/')==0}">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
   </a>
 </nav>
 <!--This div listens to swipe events that are external to other divs -->
-<div style="position:fixed;width: 100%;height:100%" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);"></div>
+<div style="position:fixed;width: 100%;height:100%;z-index:0;" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);"></div>
 <div>
   <div class="fixed-top-nav-placeholder"></div>
-  <div class="container" style="width: 90%;margin:auto;" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);">
+  <div class="container" style="width: 90%;margin:auto;position:relative;z-index:1" (swipeleft)="swipe('left', $event);" (swiperight)="swipe('right', $event);">
     <router-outlet></router-outlet>
   </div>
 </div>

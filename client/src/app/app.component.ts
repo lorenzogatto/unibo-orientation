@@ -16,7 +16,7 @@ let urls: string[] = ['/home',
 })
 
 export class AppComponent {
-    constructor(private router: Router) {
+    constructor(public router: Router) {
         this.router = router;
     }
     swipe(direction: string, event) {

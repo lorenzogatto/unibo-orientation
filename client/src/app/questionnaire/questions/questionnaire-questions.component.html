@@ -1,0 +1,8 @@
+﻿<h2>Questionario</h2>
+<div *ngFor="let question of questions" class="row question-row">
+  <div class="col-md-10">{{question.question}}</div>
+  <div class="col-md-2">
+    <input type="radio" name="{{question.question}}" value="yes"> Sì
+    <input type="radio" name="{{question.question}}" value="no"> No
+  </div>
+</div>

@@ -1,0 +1,14 @@
+﻿<h2>Login</h2>
+<form method="get" action="?" (submit)="onSubmit()" ngNativeValidate>
+  <div class="row">
+    <label class="col-xs-12" style="margin-top:0">E-mail: </label>
+    <input type="email" [(ngModel)]="email" (input)="emailError = ''" class="col-xs-12 input" required name="email"/>
+    <div class="error">{{emailError}}</div>
+    <label class="col-xs-12">Password: </label>
+    <input type="password" [(ngModel)]="password" class="col-xs-12 input"  required name="password"/>
+    <div class="error">{{passwordError}}</div>
+  </div>
+  <button type="submit">Login</button>
+  <span style="margin-left: 1rem;" >Non hai un account? <a routerLink="/user/register">Registrati</a></span>
+</form>
+<div class="error">{{error}}</div>

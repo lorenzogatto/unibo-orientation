@@ -1,35 +1,70 @@
-﻿require('app-module-path').addPath("build/");
-import * as express from "express";
-var path = require('path');
+﻿import * as express from "express";
 import { MongoClient, Db } from "mongodb";
+var path = require('path');
 var HttpStatus = require('http-status-codes');
-let app = express();
-let _public = __dirname + "/../static/";
-let uri = "mongodb://lorenzo:PWD@unibo-orientation-cluster-shard-00-00-p2i0j.mongodb.net:27017,unibo-orientation-cluster-shard-00-01-p2i0j.mongodb.net:27017,unibo-orientation-cluster-shard-00-02-p2i0j.mongodb.net:27017/unibo-orientation?ssl=true&replicaSet=unibo-orientation-cluster-shard-0&authSource=admin";
-let db: Db = null;
+var bodyParser = require('body-parser')
+import * as EmailValidator from 'email-validator';
+var jwt = require('jsonwebtoken');
+
+import { Configuration } from "./conf";
+import { registrationHandler } from "./authentication/addUser";
+import { loginHandler } from "./authentication/login";
+import { getCoursesHandler } from "./courses/get_courses";
+import { getQuestionsHandler } from "./questionnaire/get_questions";
 
 
+var app = express();
+var _public = __dirname + "/../static/";
+var databaseConnectionString: string = Configuration.getDatabaseConnectionString();
+var db: Db = null;
 
-app.get('/api/get_courses', function (req, res) {
-    console.time("dbQuery");
-    db.collection("courses").find().toArray((err, result) => {
-        if (err) res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        else {
-            console.timeEnd("dbQuery");
-            res.setHeader('Content-Type', 'application/json');
-            res.setHeader('Cache-Control', 'max-age=1000');
-            res.send(JSON.stringify({ data: result }));
-        }
-    });
-});
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+app.get('/api/get_courses', (req, res) => getCoursesHandler(req, res, db));
+app.post('/api/user/register', (req, res) => registrationHandler(req, res, db));
+app.put('/api/user/login', (req, res) => loginHandler(req, res, db));
 
 app.use('/', express.static(_public));
-/*app.get('/', function (req, res) {
-    res.sendFile(path.join(_public + "index.html"));
-});*/
+app.get('/home', (req, res) => res.sendFile(path.join(_public + "index.html")));
+//TODO
 
+app.use(function (req, res, next) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
 
-MongoClient.connect(uri).then((dbx) => {
+    // decode token
+    if (token) {
+
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+            if (err) {
+                return res.json({ data: {feedback: 'Failed to authenticate token.' } });
+            } else {
+                // if everything is good, save to request for use in other routes
+                (<any>req).decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+
+        // if there is no token
+        // return an error
+        return res.status(403).send({ data: { feedback: 'no token found' } });
+    }
+
+});
+
+/**
+ * RESTRICTED PAGES
+*/
+app.get('/api/get_questions', (req, res) => getQuestionsHandler(req, res, db));
+
+console.log("Connecting to MongoDB...");
+MongoClient.connect(databaseConnectionString).then((dbx) => {
     console.log("MongoDB connected!");
     db = dbx;
     app.listen(3000, function () {

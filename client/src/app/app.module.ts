@@ -10,10 +10,17 @@ import { CoursesComponent } from "./courses/courses.component";
 import { QuestionnaireComponent } from "./questionnaire/questionnaire.component";
 import { QuestionsComponent } from "./forum/questions.component";
 import { HammerInstance } from "@angular/platform-browser/src/dom/events/hammer_gestures";
+import { FormsModule } from '@angular/forms';
 import "hammerjs";
 import { CourseService } from "./courses/course.service";
 import { HttpModule } from "@angular/http";
 import { QuestionnaireHomeComponent } from "./questionnaire/home/questionnaire-home.component";
+import { QuestionnaireQuestionsComponent } from "./questionnaire/questions/questionnaire-questions.component";
+import { QuestionnaireResultComponent } from "./questionnaire/result/questionnaire-result.component";
+import { QuestionnaireService } from "./questionnaire/questionnaire.service";
+import { UserRegisterComponent } from "./user/register/user-register.component";
+import { AuthenticationService } from "./user/authentication.service";
+import { UserLoginComponent } from "./user/login/user-login.component";
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -28,7 +35,6 @@ export class MyHammerConfig extends HammerGestureConfig {
         mc.on('pinch', e => { alert(e);})
         return mc;
     }*/
-
 }
 
 @NgModule({
@@ -38,18 +44,27 @@ export class MyHammerConfig extends HammerGestureConfig {
       CoursesComponent,
       QuestionnaireComponent,
       QuestionnaireHomeComponent,
+      QuestionnaireQuestionsComponent,
+      QuestionnaireResultComponent,
       QuestionsComponent,
-      ContactsComponent
+      ContactsComponent,
+      UserRegisterComponent,
+      UserLoginComponent
   ],
   imports: [
       BrowserModule,
       AppRoutingModule,
-      HttpModule
+      HttpModule,
+      FormsModule
   ],
   providers: [{
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
-  }, CourseService],
+  },
+      CourseService,
+      QuestionnaireService,
+      AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,10 @@ import { CoursesComponent } from "./courses/courses.component";
 import { QuestionnaireComponent } from "./questionnaire/questionnaire.component";
 import { QuestionsComponent } from "./forum/questions.component";
 import { QuestionnaireHomeComponent } from "./questionnaire/home/questionnaire-home.component";
+import { QuestionnaireQuestionsComponent } from "./questionnaire/questions/questionnaire-questions.component";
+import { QuestionnaireResultComponent } from "./questionnaire/result/questionnaire-result.component";
+import { UserRegisterComponent } from "./user/register/user-register.component";
+import { UserLoginComponent } from "./user/login/user-login.component";
 
 const routes: Routes = [{
         path: 'home',
@@ -21,11 +25,23 @@ const routes: Routes = [{
         path: 'questionnaire/home',
         component: QuestionnaireHomeComponent
     }, {
+          path: 'questionnaire/questions',
+        component: QuestionnaireQuestionsComponent
+    }, {
+        path: 'questionnaire/result',
+        component: QuestionnaireResultComponent
+    }, {
         path: 'questions',
         component: QuestionsComponent
     }, {
         path: 'contacts',
         component: ContactsComponent
+    }, {
+        path: 'user/register',
+        component: UserRegisterComponent
+    }, {
+        path: 'user/login',
+        component: UserLoginComponent
     }, {
         path: '',
         redirectTo: '/home',

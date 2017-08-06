@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 
 @Component({
     selector: 'questionnaire-home',
-    template: 'Fai il questionario!!!!!',
+    templateUrl: 'questionnaire-home.component.html',
     styleUrls: []
 })
 export class QuestionnaireHomeComponent implements OnInit {

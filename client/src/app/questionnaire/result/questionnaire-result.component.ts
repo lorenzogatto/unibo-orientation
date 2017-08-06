@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
     template: 'Fai il questionario!!!!!',
     styleUrls: []
 })
-export class QuestionnaireHomeComponent implements OnInit {
+export class QuestionnaireResultComponent implements OnInit {
 
     constructor(private router: Router) { }
     ngOnInit(): void {
