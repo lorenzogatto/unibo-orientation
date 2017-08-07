@@ -11,6 +11,8 @@ import { registrationHandler } from "./authentication/addUser";
 import { loginHandler } from "./authentication/login";
 import { getCoursesHandler } from "./courses/get_courses";
 import { getQuestionsHandler } from "./questionnaire/get_questions";
+import { putAnswersHandler } from "./questionnaire/put_answers";
+import { getResultHandler } from "./questionnaire/get_result";
 
 
 var app = express();
@@ -33,13 +35,13 @@ app.get('/home', (req, res) => res.sendFile(path.join(_public + "index.html")));
 
 app.use(function (req, res, next) {
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-
+    var token = req.body.token || req.params['token'] || req.headers['x-access-token'];
+    //console.log(token);
+    //console.log(req.headers);
     // decode token
     if (token) {
-
         // verifies secret and checks exp
-        jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+        jwt.verify(token, Configuration.getJWTSecret(), function (err, decoded) {
             if (err) {
                 return res.json({ data: {feedback: 'Failed to authenticate token.' } });
             } else {
@@ -48,20 +50,19 @@ app.use(function (req, res, next) {
                 next();
             }
         });
-
     } else {
-
         // if there is no token
         // return an error
-        return res.status(403).send({ data: { feedback: 'no token found' } });
+        return res.status(401).send({feedback: 'no token found'});
     }
-
 });
 
 /**
  * RESTRICTED PAGES
 */
-app.get('/api/get_questions', (req, res) => getQuestionsHandler(req, res, db));
+app.get('/api/questionnaire/get_questions', (req, res) => getQuestionsHandler(req, res, db));
+app.get('/api/questionnaire/get_result', (req, res) => getResultHandler(req, res, db));
+app.put('/api/questionnaire/put_answers', (req, res) => putAnswersHandler(req, res, db));
 
 console.log("Connecting to MongoDB...");
 MongoClient.connect(databaseConnectionString).then((dbx) => {

@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'user-register',
     templateUrl: './user-register.component.html',
-    styleUrls: ['../shared/shared-user.css']
+    styleUrls: ['../../shared/forms.css']
 })
 export class UserRegisterComponent {
 

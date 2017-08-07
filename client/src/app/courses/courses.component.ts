@@ -33,14 +33,6 @@ export class CoursesComponent implements OnInit {
         button.classList.toggle("active");
         var panel = button.nextElementSibling;
         var xd: any = $(panel)
-        xd.slideToggle();
-        console.log("Cmin");
-        /*if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-            //setTimeout(() => { panel.style.maxHeight = 'none'; }, 500);
-        }*/
-        
+        xd.slideToggle();        
     }
 }

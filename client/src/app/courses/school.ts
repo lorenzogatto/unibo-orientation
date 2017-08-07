@@ -1,15 +1,10 @@
 ﻿import { Course } from "./course";
+import { CoursesGroup } from "../shared/CoursesGroup";
 
-export class School {
-    name: string;
+export class School extends CoursesGroup{
     color: string;
-    courses: Course[];
 
     constructor() {
-        this.courses = [];
-    }
-
-    insert(course: Course) {
-        this.courses.push(course);
+        super();
     }
 }

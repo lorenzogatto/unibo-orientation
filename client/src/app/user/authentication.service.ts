@@ -17,7 +17,6 @@ export class AuthenticationService {
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.registrationUrl, JSON.stringify(newUser), options).toPromise();
     }
@@ -37,9 +36,25 @@ export class AuthenticationService {
                 var res = response.json();
                 if (res.feedback === "ok") {
                     let token = res.token;
+                    let user = res.user;
+                    console.log(user);
                     localStorage.setItem("token", token);
+                    localStorage.setItem("user", JSON.stringify(user));
                 }
                 return response;
             });
+    }
+
+    getLoginToken() {
+        return localStorage.getItem("token");
+    }
+
+    getUser() {
+        return JSON.parse(localStorage.getItem("user"));
+    }
+
+    logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
     }
 }

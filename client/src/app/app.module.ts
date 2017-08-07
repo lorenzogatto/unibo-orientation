@@ -21,6 +21,8 @@ import { QuestionnaireService } from "./questionnaire/questionnaire.service";
 import { UserRegisterComponent } from "./user/register/user-register.component";
 import { AuthenticationService } from "./user/authentication.service";
 import { UserLoginComponent } from "./user/login/user-login.component";
+import { UserInfoComponent } from "./user/info/user-info.component";
+import { UserComponent } from "./user/user.component";
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -49,7 +51,9 @@ export class MyHammerConfig extends HammerGestureConfig {
       QuestionsComponent,
       ContactsComponent,
       UserRegisterComponent,
-      UserLoginComponent
+      UserLoginComponent,
+      UserComponent,
+      UserInfoComponent
   ],
   imports: [
       BrowserModule,

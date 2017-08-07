@@ -1,8 +1,12 @@
 ﻿<h2>Questionario</h2>
-<div *ngFor="let question of questions" class="row question-row">
-  <div class="col-md-10">{{question.question}}</div>
-  <div class="col-md-2">
-    <input type="radio" name="{{question.question}}" value="yes"> Sì
-    <input type="radio" name="{{question.question}}" value="no"> No
+<form (submit)="onSubmit(this)" ngNativeValidate name="questionnaire-form">
+  <div *ngFor="let question of questions" class="row question-row">
+    <div class="col-md-10">{{question.question}}</div>
+    <div class="col-md-2">
+      <input type="radio" name="{{question.question}}" value="1" required checked> Sì
+      <input type="radio" name="{{question.question}}" value="0" required> No
+    </div>
   </div>
-</div>
+  <div class="col-xs-12" style="text-align:right;">
+  <button type="submit">Invia</button></div>
+</form>

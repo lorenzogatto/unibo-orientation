@@ -7,7 +7,7 @@ import { Configuration } from "../conf";
 export function loginHandler(req, res, db) {
     var email = req.body.email;
     var password = req.body.password;
-    db.collection("users").findOne({ email: req.body.email }, (err, user) => {
+    db.collection("users").findOne({ email: email }, (err, user) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return;
@@ -26,9 +26,12 @@ export function loginHandler(req, res, db) {
             return;
         }
         var token = jwt.sign(user, Configuration.getJWTSecret(), {
-            expiresIn: "5m" // expires in 5 minutes
+            expiresIn: "50m"
         });
-
-        res.send(JSON.stringify({feedback: "ok", token: token}));
+        let userView = {
+            username: user.username,
+            email: user.email
+        }
+        res.send(JSON.stringify({feedback: "ok", token: token, user:userView}));
     });
 }

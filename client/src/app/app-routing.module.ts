@@ -10,11 +10,12 @@ import { QuestionnaireQuestionsComponent } from "./questionnaire/questions/quest
 import { QuestionnaireResultComponent } from "./questionnaire/result/questionnaire-result.component";
 import { UserRegisterComponent } from "./user/register/user-register.component";
 import { UserLoginComponent } from "./user/login/user-login.component";
+import { UserComponent } from "./user/user.component";
+import { UserInfoComponent } from "./user/info/user-info.component";
 
 const routes: Routes = [{
         path: 'home',
         component: PresentationComponent
-
     }, {
         path: 'courses',
         component: CoursesComponent
@@ -37,11 +38,17 @@ const routes: Routes = [{
         path: 'contacts',
         component: ContactsComponent
     }, {
+        path: 'user',
+        component: UserComponent
+    }, {
         path: 'user/register',
         component: UserRegisterComponent
     }, {
         path: 'user/login',
         component: UserLoginComponent
+    }, {
+        path: 'user/info',
+        component: UserInfoComponent
     }, {
         path: '',
         redirectTo: '/home',

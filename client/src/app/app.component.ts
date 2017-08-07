@@ -1,11 +1,13 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from "@angular/router";
+import { AuthenticationService } from "./user/authentication.service";
 
 let urls: string[] = ['/home',
     '/courses',
     '/questionnaire',
     '/questions',
-    '/contacts'
+    '/contacts',
+    '/user'
 ];
 
 @Component({
@@ -16,9 +18,8 @@ let urls: string[] = ['/home',
 })
 
 export class AppComponent {
-    constructor(public router: Router) {
-        this.router = router;
-    }
+    constructor(public router: Router, public authenticationService: AuthenticationService) { }
+
     swipe(direction: string, event) {
         //alert(event.pointerType);
         console.log(event);

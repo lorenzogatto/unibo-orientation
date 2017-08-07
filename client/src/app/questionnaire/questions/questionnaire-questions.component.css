@@ -1,6 +1,6 @@
 .question-row {
-  margin-top: 0.15rem; }
-  .question-row input:not(first-child) {
+  margin-top: 0.2rem; }
+  .question-row input:not(:first-child) {
     margin-left: 0.5rem; }
 
 /*# sourceMappingURL=questionnaire-questions.component.css.map */

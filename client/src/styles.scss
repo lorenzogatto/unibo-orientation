@@ -23,6 +23,11 @@ body, html {
   margin-bottom: 0.5rem;
 }
 
+.container {
+  margin: 0 auto 1rem;
+  width: 90%;
+}
+
 .row {
   display: -ms-flexbox;
   display: flex;
