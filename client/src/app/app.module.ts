@@ -10,6 +10,7 @@ import { CoursesComponent } from "./courses/courses.component";
 import { QuestionnaireComponent } from "./questionnaire/questionnaire.component";
 import { HammerInstance } from "@angular/platform-browser/src/dom/events/hammer_gestures";
 import { FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import "hammerjs";
 import { CourseService } from "./courses/course.service";
 import { HttpModule } from "@angular/http";
@@ -62,7 +63,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       BrowserModule,
       AppRoutingModule,
       HttpModule,
-      FormsModule
+      FormsModule,
+      InfiniteScrollModule 
   ],
   providers: [{
       provide: HAMMER_GESTURE_CONFIG,

@@ -32,6 +32,7 @@
     "http-status-codes": "^1.2.0",
     "jquery": "^3.2.1",
     "mongodb": "^2.2.30",
+    "ngx-infinite-scroll": "^0.5.1",
     "rxjs": "^5.4.1",
     "zone.js": "^0.8.14"
   },

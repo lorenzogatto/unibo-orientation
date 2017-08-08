@@ -15,10 +15,12 @@ import { Subject } from "rxjs/Subject";
 })
 export class ForumQuestionsComponent implements OnInit {
 
+    public currentQueryString: string;
+    public showedQuestions: any[];
+    private allQuestions: any[];
+    private nextQueryString: string;
     private searchTerms = new Subject<string>();
-    public questions: Observable<any>;
-    
-
+    private questions: Observable<any>;
 
     constructor(private forumService: ForumService, private router: Router) { }
     ngOnInit(): void {
@@ -26,22 +28,36 @@ export class ForumQuestionsComponent implements OnInit {
             //.debounceTime(300)        // wait 300ms after each keystroke before considering the term
             .distinctUntilChanged()   // ignore if next search term is same as previous
             //.subscribe((next) => alert(next))
-            .switchMap(query =>    // switch to new observable each time the term changes
-                // return the http search observable
-                 this.forumService.getQuestions(query))
+            .switchMap(query => { // switch to new observable each time the term changes
+                this.nextQueryString = query;
+                return this.forumService.getQuestions(query);// return the http search observable
+            })
                 // or the observable of empty heroes if there was no search term
             .catch(error => {
                 // TODO: add real error handling
                 console.log(error);
                 return Observable.of<any[]>([]);
             });
-
+        this.questions.subscribe((next: any[]) => {
+            this.currentQueryString = this.nextQueryString;
+            this.allQuestions = next;
+            this.showedQuestions = next.slice(0, 10);
+        });
+        //this.questions.subscribe((next) => alert(next));
         setTimeout(() => this.search(""), 1);
     }
 
     // Push a search term into the observable stream.
     search(term: string): void {
         this.searchTerms.next(term);
+    }
+
+    onScrollDown() {
+        console.log('scrolled down!');
+        let newQuestions = this.allQuestions.slice(this.showedQuestions.length, this.showedQuestions.length + 10);
+        console.log(this.allQuestions);
+        console.log(newQuestions);
+        this.showedQuestions = this.showedQuestions.concat(newQuestions);
     }
 
 }
