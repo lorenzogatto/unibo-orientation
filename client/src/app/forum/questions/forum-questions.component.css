@@ -1,0 +1,10 @@
+.question-box {
+  margin-bottom: 1rem;
+  border: 1px solid darkgray;
+  border-radius: 1rem;
+  padding: 0.5rem; }
+
+.asker, .reply {
+  font-size: 0.8rem; }
+
+/*# sourceMappingURL=forum-questions.component.css.map */

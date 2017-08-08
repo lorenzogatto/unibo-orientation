@@ -4,7 +4,6 @@ import { ContactsComponent } from "./contacts/contacts.component";
 import { PresentationComponent } from "./presentation/presentation.component";
 import { CoursesComponent } from "./courses/courses.component";
 import { QuestionnaireComponent } from "./questionnaire/questionnaire.component";
-import { QuestionsComponent } from "./forum/questions.component";
 import { QuestionnaireHomeComponent } from "./questionnaire/home/questionnaire-home.component";
 import { QuestionnaireQuestionsComponent } from "./questionnaire/questions/questionnaire-questions.component";
 import { QuestionnaireResultComponent } from "./questionnaire/result/questionnaire-result.component";
@@ -12,6 +11,8 @@ import { UserRegisterComponent } from "./user/register/user-register.component";
 import { UserLoginComponent } from "./user/login/user-login.component";
 import { UserComponent } from "./user/user.component";
 import { UserInfoComponent } from "./user/info/user-info.component";
+import { ForumQuestionsComponent } from "./forum/questions/forum-questions.component";
+import { ForumAskComponent } from "./forum/ask/forum-ask.component";
 
 const routes: Routes = [{
         path: 'home',
@@ -32,8 +33,11 @@ const routes: Routes = [{
         path: 'questionnaire/result',
         component: QuestionnaireResultComponent
     }, {
-        path: 'questions',
-        component: QuestionsComponent
+        path: 'forum/questions',
+        component: ForumQuestionsComponent
+    }, {
+        path: 'forum/ask',
+        component: ForumAskComponent
     }, {
         path: 'contacts',
         component: ContactsComponent

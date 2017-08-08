@@ -8,7 +8,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { CoursesComponent } from "./courses/courses.component";
 import { QuestionnaireComponent } from "./questionnaire/questionnaire.component";
-import { QuestionsComponent } from "./forum/questions.component";
 import { HammerInstance } from "@angular/platform-browser/src/dom/events/hammer_gestures";
 import { FormsModule } from '@angular/forms';
 import "hammerjs";
@@ -23,6 +22,9 @@ import { AuthenticationService } from "./user/authentication.service";
 import { UserLoginComponent } from "./user/login/user-login.component";
 import { UserInfoComponent } from "./user/info/user-info.component";
 import { UserComponent } from "./user/user.component";
+import { ForumQuestionsComponent } from "./forum/questions/forum-questions.component";
+import { ForumAskComponent } from "./forum/ask/forum-ask.component";
+import { ForumService } from "./forum/forum.service";
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -48,7 +50,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       QuestionnaireHomeComponent,
       QuestionnaireQuestionsComponent,
       QuestionnaireResultComponent,
-      QuestionsComponent,
+      ForumQuestionsComponent,
+      ForumAskComponent,
       ContactsComponent,
       UserRegisterComponent,
       UserLoginComponent,
@@ -67,7 +70,8 @@ export class MyHammerConfig extends HammerGestureConfig {
   },
       CourseService,
       QuestionnaireService,
-      AuthenticationService
+      AuthenticationService,
+      ForumService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,19 @@
+﻿<div class="row" style="margin-top:0.5rem">
+  <input type="text" #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder="Cerca..." class="input col-xs-12 col-md-10" style="margin-top:0.5rem" />
+  <button routerLink="/forum/ask" class="input col-xs-12 col-md-2" style="margin-top: 0.5rem">Chiedi</button>
+</div>
+<h3>Domande per: X</h3>
+
+<div *ngFor="let question of questions | async" class="row question-box">
+  <div class="col-xs-12 asker">Domanda da: <strong>{{question.username}}</strong></div>
+  <div class="col-xs-12">
+    <strong>{{question.question}}</strong>
+  </div>
+  <div class="col-xs-12">
+    {{question.details}}</div>
+  <div class="col-xs-12 reply">
+    <a href="todo.com">Reply</a></div>
+  <div class="col-xs-12">
+    Vai su unibo.it, clicca qui poi lì
+  </div>
+</div>

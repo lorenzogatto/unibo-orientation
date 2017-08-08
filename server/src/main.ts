@@ -1,7 +1,7 @@
 ﻿import * as express from "express";
 import { MongoClient, Db } from "mongodb";
 var path = require('path');
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
 var bodyParser = require('body-parser')
 import * as EmailValidator from 'email-validator';
 var jwt = require('jsonwebtoken');
@@ -13,6 +13,8 @@ import { getCoursesHandler } from "./courses/get_courses";
 import { getQuestionsHandler } from "./questionnaire/get_questions";
 import { putAnswersHandler } from "./questionnaire/put_answers";
 import { getResultHandler } from "./questionnaire/get_result";
+import { postForumQuestionHandler } from "./forum/postQuestion";
+import { getForumQuestionsHandler } from "./forum/getQuestions";
 
 
 var app = express();
@@ -36,14 +38,13 @@ app.get('/home', (req, res) => res.sendFile(path.join(_public + "index.html")));
 app.use(function (req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.params['token'] || req.headers['x-access-token'];
-    //console.log(token);
-    //console.log(req.headers);
     // decode token
     if (token) {
+        //console.log("token", token);
         // verifies secret and checks exp
         jwt.verify(token, Configuration.getJWTSecret(), function (err, decoded) {
             if (err) {
-                return res.json({ data: {feedback: 'Failed to authenticate token.' } });
+                return res.status(HttpStatus.UNAUTHORIZED).send(JSON.stringify({ feedback: "invalid token" }));
             } else {
                 // if everything is good, save to request for use in other routes
                 (<any>req).decoded = decoded;
@@ -51,9 +52,24 @@ app.use(function (req, res, next) {
             }
         });
     } else {
+        next();
+    }
+});
+/**
+ * Pages with optional login
+*/
+app.put('/api/forum/get_questions', (req, res) => getForumQuestionsHandler(req, res, db));
+
+app.use(function (req, res, next) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.params['token'] || req.headers['x-access-token'];
+    // decode token
+    if (!token) {
         // if there is no token
         // return an error
-        return res.status(401).send({feedback: 'no token found'});
+        return res.status(HttpStatus.UNAUTHORIZED).send({ feedback: 'no token found' });
+    } else {
+        next();
     }
 });
 
@@ -63,6 +79,8 @@ app.use(function (req, res, next) {
 app.get('/api/questionnaire/get_questions', (req, res) => getQuestionsHandler(req, res, db));
 app.get('/api/questionnaire/get_result', (req, res) => getResultHandler(req, res, db));
 app.put('/api/questionnaire/put_answers', (req, res) => putAnswersHandler(req, res, db));
+
+app.post('/api/forum/post_question', (req, res) => postForumQuestionHandler(req, res, db));
 
 console.log("Connecting to MongoDB...");
 MongoClient.connect(databaseConnectionString).then((dbx) => {
