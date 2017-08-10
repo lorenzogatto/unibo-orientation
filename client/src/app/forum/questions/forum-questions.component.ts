@@ -15,6 +15,7 @@ import { Subject } from "rxjs/Subject";
 })
 export class ForumQuestionsComponent implements OnInit {
     replyQuestion: any;
+    loadingError: boolean = false;
 
     public currentQueryString: string;
     public showedQuestions: any[];
@@ -37,6 +38,7 @@ export class ForumQuestionsComponent implements OnInit {
             .catch(error => {
                 // TODO: add real error handling
                 console.log(error);
+                this.loadingError = true;
                 return Observable.of<any[]>([]);
             });
         this.questions.subscribe((next: any[]) => {

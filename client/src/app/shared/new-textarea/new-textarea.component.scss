@@ -1,0 +1,10 @@
+﻿textarea {
+  width: 100%;
+  resize: none;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
+  border: 0.05rem solid darkgray;
+  max-height: 10rem;
+  min-height: 3rem;
+  overflow-y: auto;
+}

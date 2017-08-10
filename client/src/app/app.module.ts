@@ -27,7 +27,8 @@ import { ForumQuestionsComponent } from "./forum/questions/forum-questions.compo
 import { ForumAskComponent } from "./forum/ask/forum-ask.component";
 import { ForumService } from "./forum/forum.service";
 import { ForumReplyComponent } from "./forum/reply/forum-reply.component";
-
+import { NgSpinKitModule } from 'ng-spin-kit';
+import { NewTextareaComponent } from "./shared/new-textarea/new-textarea.component";
 
 delete Hammer.defaults.cssProps.userSelect;
 export class MyHammerConfig extends HammerGestureConfig {
@@ -59,14 +60,16 @@ export class MyHammerConfig extends HammerGestureConfig {
       UserRegisterComponent,
       UserLoginComponent,
       UserComponent,
-      UserInfoComponent
+      UserInfoComponent,
+      NewTextareaComponent
   ],
   imports: [
       BrowserModule,
       AppRoutingModule,
       HttpModule,
       FormsModule,
-      InfiniteScrollModule 
+      InfiniteScrollModule,
+      NgSpinKitModule
   ],
   providers: [{
       provide: HAMMER_GESTURE_CONFIG,

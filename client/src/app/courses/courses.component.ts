@@ -13,7 +13,8 @@ export class CoursesComponent implements OnInit {
 
     public schools: School[];
     private schoolNames: string[];
-    private errorGettingCourses: boolean = false;
+    public loadingError: boolean = false;
+
     constructor(private courseService: CourseService) { }
 
     ngOnInit(): void {
@@ -23,7 +24,7 @@ export class CoursesComponent implements OnInit {
                 console.log(schools);
             })
             .catch((err) => {
-                this.errorGettingCourses = true;
+                this.loadingError = true;
                 console.log("Errore " + err)
             });
     }

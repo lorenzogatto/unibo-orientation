@@ -13,15 +13,15 @@ export function registrationHandler(req, res, db: Db) {
 
 function checkInput(req, res) {
     if (req.body.password === undefined || req.body.password.length < 8) {
-        res.send(JSON.stringify({ data: { feedback: "password too short" } }));
+        res.send(JSON.stringify({ feedback: "password too short" }));
         return false;
     }
     if (req.body.username === undefined || req.body.username.length < 1) {
-        res.send(JSON.stringify({ data: { feedback: "username not present" } }));
+        res.send(JSON.stringify({ feedback: "username not present" }));
         return false;
     }
     if (req.body.email === undefined || EmailValidator.validate(req.body.email) === false) {
-        res.send(JSON.stringify({ data: { feedback: "email not valid" } }));
+        res.send(JSON.stringify({ feedback: "email not valid" }));
         return false;
     }
     return true;
@@ -36,7 +36,7 @@ function isEmailInDb(req, res, db, callback) {
         }
         res.setHeader('Content-Type', 'application/json');
         if (result.length > 0) {
-            res.send(JSON.stringify({ data: { feedback: "email already taken" } }));
+            res.send(JSON.stringify({ feedback: "email already taken" }));
             return;
         }
         callback();
@@ -51,7 +51,7 @@ function isUserInDb(req, res, db, callback) {
         }
         res.setHeader('Content-Type', 'application/json');
         if (result.length > 0) {
-            res.send(JSON.stringify({ data: { feedback: "username already taken" } }));
+            res.send(JSON.stringify({ feedback: "username already taken" }));
             return;
         }
         callback();
@@ -70,6 +70,6 @@ function insertInDb(req, res, db) {
             return
         }
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ data: { feedback: "ok" } }));
+        res.send(JSON.stringify({ feedback: "ok" }));
     });
 }

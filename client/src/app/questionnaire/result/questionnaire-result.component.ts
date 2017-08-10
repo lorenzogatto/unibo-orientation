@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 })
 export class QuestionnaireResultComponent implements OnInit {
     courseGroups: CoursesGroup[];
+    loadingError: boolean = false;
 
     constructor(
         private router: Router,
@@ -32,8 +33,8 @@ export class QuestionnaireResultComponent implements OnInit {
                     }
                 }
                 this.courseGroups = courseGroups;
-            }).catch(reason => alert(reason));
-        }).catch(reason => alert(reason));
+            }).catch(reason => { alert(reason); this.loadingError = true; });
+        }).catch(reason => {alert(reason); this.loadingError = true;});
     }
 
     accordionClick(event: Event) {

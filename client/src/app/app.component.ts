@@ -5,7 +5,7 @@ import { AuthenticationService } from "./user/authentication.service";
 let urls: string[] = ['/home',
     '/courses',
     '/questionnaire',
-    '/questions',
+    '/forum/questions',
     '/contacts',
     '/user'
 ];

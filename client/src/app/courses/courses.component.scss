@@ -27,7 +27,8 @@ button.accordion {
     content: '\002B';
     font-weight: bold;
     float: left;
-    margin-right: 0.4rem;
+    margin-left: 0.2rem;
+    margin-right: 0.6rem;
     font-family: "Lucida Console", Monaco, monospace;
     text-shadow: 0.05rem 0 0 #000, 0 -0.05rem 0 #000, 0 0.05rem 0 #000, -0.05rem 0 0 #000;
   }
@@ -54,4 +55,5 @@ div.panel {
 div.panel.course-info {
   font-size: 0.95rem;
   padding: 0.4rem 0.5rem 0.5rem 1.4rem;
+  margin-top: 0.3rem;
 }

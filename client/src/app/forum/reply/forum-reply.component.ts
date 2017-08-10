@@ -24,14 +24,6 @@ export class ForumReplyComponent{
         return false;
     }
 
-    fitContent(event: Event) {
-        let target: any = event.target;
-        //console.log(target.prototype.toString());
-        console.log(target.scrollHeight);
-        target.style.height = "0";
-        target.style.height = target.scrollHeight + "px";
-    }
-
     onSubmit(x) {
         let form: HTMLFormElement = x.target;
         console.log(x);

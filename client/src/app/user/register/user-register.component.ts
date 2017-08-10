@@ -28,12 +28,13 @@ export class UserRegisterComponent {
 
         this.authenticationService.register(this.username, this.email, this.password).then(response => {
             console.log(response);
-            let res = response.json().data;
-            if (res.feedback === "ok") {
+            let res = response.json();
+            let feedback: string = res.feedback;
+            if (feedback === "ok") {
                 this.router.navigateByUrl("/user/login");
-            } else if (res.feedback === "username") {
+            } else if (feedback.indexOf("username") != -1) {
                 this.usernameError = "Errore: username già in uso";
-            } else if (res.feedback === "email") {
+            } else if (feedback.indexOf("email") != -1) {
                 this.emailError = "Errore: indirizzo e-mail già in uso";
             } else {
                 this.error = "Errore imprevisto!";

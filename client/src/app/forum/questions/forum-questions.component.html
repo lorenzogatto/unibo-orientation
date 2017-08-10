@@ -5,11 +5,15 @@
 <h3 *ngIf="!currentQueryString">Domande</h3>
 <h3 *ngIf="currentQueryString">Domande per: {{currentQueryString}}</h3>
 
+<sk-circle *ngIf="showedQuestions === undefined && !loadingError"></sk-circle>
+<span *ngIf="loadingError" class="error">Errore nel caricamento delle domande, riprovare più tardi!</span>
+
 <div data-infinite-scroll
      debounce
      [infiniteScrollDistance]="1"
      [infiniteScrollThrottle]="500"
-     (scrolled)="onScrollDown()">
+     (scrolled)="onScrollDown()"
+     *ngIf="!loadingError && showedQuestions != undefined">
   <div *ngFor="let question of showedQuestions" class="row question-box">
     <div class="col-xs-12 asker">Domanda da: <strong>{{question.username}}</strong></div>
     <div class="col-xs-12">
@@ -19,9 +23,8 @@
       {{question.details}}
     </div>
     <forum-reply [question]="question" *ngIf="!question.reply"></forum-reply>
-    <div class="col-xs-12">Domanda già risposta</div>
-    <div class="col-xs-12">
-      {{question.reply}}
+    <div class="col-xs-12" *ngIf="question.reply">
+      Risposta: {{question.reply}}
     </div>
   </div>
 </div>

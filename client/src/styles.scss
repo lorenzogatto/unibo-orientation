@@ -25,7 +25,8 @@ body, html {
 
 .container {
   margin: 0 auto 1rem;
-  width: 90%;
+  width: 95%;
+  max-width: 45rem;
 }
 
 .row {
@@ -57,4 +58,26 @@ body, html {
   @for $i from 1 through 12 {
     @include make-col('md', $i);
   }
+}
+
+a {
+  &:link {
+    color: blue;
+  }
+
+  &:visited {
+    color: blue;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: rgb(0, 0, 150);
+    }
+  }
+
+  &:active {
+    color: red;
+  }
+
+  text-decoration: underline;
 }

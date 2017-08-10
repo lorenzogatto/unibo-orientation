@@ -10,7 +10,8 @@ import { QuestionnaireService } from "../questionnaire.service";
     styleUrls: ['questionnaire-questions.component.scss', '../../shared/forms.scss']
 })
 export class QuestionnaireQuestionsComponent implements OnInit {
-    questions: Question[] = [];
+    questions: Question[];
+    loadingError: boolean = false;
 
     constructor(private router: Router, private questionnaireService: QuestionnaireService) { }
     ngOnInit(): void {
@@ -19,7 +20,13 @@ export class QuestionnaireQuestionsComponent implements OnInit {
                 this.questions = questions;
                 console.log(questions);
             })
-            .catch(reason => console.log(reason));//TODO
+            .catch(reason => {
+                if (reason.status === 401) {
+                    this.router.navigateByUrl("/user/login");
+                } else {
+                    this.loadingError = true;
+                }
+            });//TODO
     }
 
     onSubmit() {

@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'questionnaire-home',
     templateUrl: 'questionnaire-home.component.html',
-    styleUrls: []
+    styleUrls: ['../../shared/forms.scss']
 })
 export class QuestionnaireHomeComponent implements OnInit {
 

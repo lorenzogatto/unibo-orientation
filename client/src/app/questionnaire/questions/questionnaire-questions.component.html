@@ -1,5 +1,8 @@
 ﻿<h2>Questionario</h2>
-<form (submit)="onSubmit()" ngNativeValidate name="questionnaire-form">
+<sk-circle *ngIf="!questions && !loadingError"></sk-circle>
+<span *ngIf="loadingError" class="error">Errore nel caricamento del questionario, riprovare più tardi!</span>
+
+<form *ngIf="questions" (submit)="onSubmit()" ngNativeValidate name="questionnaire-form">
   <div *ngFor="let question of questions" class="row question-row">
     <div class="col-md-10">{{question.question}}</div>
     <div class="col-md-2">
