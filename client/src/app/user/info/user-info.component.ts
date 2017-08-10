@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'user-info',
     templateUrl: './user-info.component.html',
-    styleUrls: ['../../shared/forms.css']
+    styleUrls: ['../../shared/forms.scss']
 })
 export class UserInfoComponent implements OnInit {
     user;

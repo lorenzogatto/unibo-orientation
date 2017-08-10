@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'forum-ask',
     templateUrl: 'forum-ask.component.html',
-    styleUrls: ['../../shared/forms.css']
+    styleUrls: ['../../shared/forms.scss']
 })
 export class ForumAskComponent {
 

@@ -6,7 +6,7 @@ import * as $ from 'jquery';
 @Component({
     selector: 'forum-reply',
     templateUrl: 'forum-reply.component.html',
-    styleUrls: ['../../shared/forms.css', 'forum-reply.component.css']
+    styleUrls: ['../../shared/forms.scss', 'forum-reply.component.scss']
 })
 export class ForumReplyComponent{
 

@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'user-login',
     templateUrl: './user-login.component.html',
-    styleUrls: ['../../shared/forms.css']
+    styleUrls: ['../../shared/forms.scss']
 })
 export class UserLoginComponent {
     

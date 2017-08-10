@@ -7,7 +7,7 @@ import * as $ from 'jquery';
 @Component({
     selector: 'courses',
     templateUrl: './courses.component.html',
-    styleUrls: ['courses.component.css'],
+    styleUrls: ['courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
 

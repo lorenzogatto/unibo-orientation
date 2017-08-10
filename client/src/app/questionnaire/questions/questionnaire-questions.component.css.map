@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,aAAc;EACZ,UAAU,EAAE,MAAM;EAClB,qCAAwB;IACtB,WAAW,EAAE,MAAM",
-"sources": ["questionnaire-questions.component.scss"],
-"names": [],
-"file": "questionnaire-questions.component.css"
-}

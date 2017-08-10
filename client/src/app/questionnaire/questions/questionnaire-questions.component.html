@@ -1,5 +1,5 @@
 ﻿<h2>Questionario</h2>
-<form (submit)="onSubmit(this)" ngNativeValidate name="questionnaire-form">
+<form (submit)="onSubmit()" ngNativeValidate name="questionnaire-form">
   <div *ngFor="let question of questions" class="row question-row">
     <div class="col-md-10">{{question.question}}</div>
     <div class="col-md-2">

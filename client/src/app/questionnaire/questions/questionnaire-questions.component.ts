@@ -7,7 +7,7 @@ import { QuestionnaireService } from "../questionnaire.service";
 @Component({
     selector: 'questionnaire-questions',
     templateUrl: 'questionnaire-questions.component.html',
-    styleUrls: ['questionnaire-questions.component.css', '../../shared/forms.css']
+    styleUrls: ['questionnaire-questions.component.scss', '../../shared/forms.scss']
 })
 export class QuestionnaireQuestionsComponent implements OnInit {
     questions: Question[] = [];

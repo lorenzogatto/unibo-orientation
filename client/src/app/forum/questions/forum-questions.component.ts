@@ -11,7 +11,7 @@ import { Subject } from "rxjs/Subject";
 @Component({
     selector: 'forum-questions',
     templateUrl: 'forum-questions.component.html',
-    styleUrls: ['../../shared/forms.css', 'forum-questions.component.css']
+    styleUrls: ['../../shared/forms.scss', 'forum-questions.component.scss']
 })
 export class ForumQuestionsComponent implements OnInit {
     replyQuestion: any;
@@ -49,7 +49,7 @@ export class ForumQuestionsComponent implements OnInit {
     }
 
     // Push a search term into the observable stream.
-    private search(term: string): void {
+    search(term: string): void {
         this.searchTerms.next(term);
     }
 
