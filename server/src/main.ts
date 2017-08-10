@@ -15,6 +15,7 @@ import { putAnswersHandler } from "./questionnaire/put_answers";
 import { getResultHandler } from "./questionnaire/get_result";
 import { postForumQuestionHandler } from "./forum/postQuestion";
 import { getForumQuestionsHandler } from "./forum/getQuestions";
+import { postForumReplyHandler } from "./forum/postReply";
 
 
 var app = express();
@@ -81,6 +82,7 @@ app.get('/api/questionnaire/get_result', (req, res) => getResultHandler(req, res
 app.put('/api/questionnaire/put_answers', (req, res) => putAnswersHandler(req, res, db));
 
 app.post('/api/forum/post_question', (req, res) => postForumQuestionHandler(req, res, db));
+app.post('/api/forum/post_reply', (req, res) => postForumReplyHandler(req, res, db));
 
 console.log("Connecting to MongoDB...");
 MongoClient.connect(databaseConnectionString).then((dbx) => {

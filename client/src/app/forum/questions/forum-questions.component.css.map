@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,aAAc;EACZ,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,sBAAsB;EAC9B,aAAa,EAAE,OAAO;EACtB,OAAO,EAAE,MAAM;;AAGjB,cAAe;EACb,SAAS,EAAE,MAAM",
+"mappings": "AAAA,aAAc;EACZ,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,sBAAsB;EAC9B,aAAa,EAAE,OAAO;EACtB,OAAO,EAAE,MAAM;;AAGjB,MAAM;EACJ,SAAS,EAAE,MAAM",
 "sources": ["forum-questions.component.scss"],
 "names": [],
 "file": "forum-questions.component.css"

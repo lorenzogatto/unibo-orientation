@@ -22,6 +22,7 @@ export class AppComponent {
 
     swipe(direction: string, event) {
         //alert(event.pointerType);
+        if (this.fromMap(event)) return;
         console.log(event);
         let index = urls.findIndex((e) => this.router.url.startsWith(e));
         if (index === -1) {
@@ -34,5 +35,12 @@ export class AppComponent {
             index = Math.max(index - 1, 0);
         }
         this.router.navigateByUrl(urls[index]);
+    }
+    fromMap(event) {
+        let path: any[] = event.srcEvent.path;
+        for (let i = 0; i < path.length; i++)
+            if (path[i].id === "map")
+                return true;
+        return false;
     }
 }

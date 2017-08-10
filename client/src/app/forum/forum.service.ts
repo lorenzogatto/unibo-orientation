@@ -11,6 +11,7 @@ import { Observable } from "rxjs/Observable";
 export class ForumService {
     private postQuestionUrl = 'api/forum/post_question';
     private getQuestionsUrl = 'api/forum/get_questions';
+    private postReplyUrl = 'api/forum/post_reply';
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
     postQuestion(question): Promise<any> {
@@ -34,5 +35,15 @@ export class ForumService {
         //console.log(JSON.stringify(question));
         return this.http.put(this.getQuestionsUrl, JSON.stringify({ query: query }), options)
             .map(response => response.json());;
+    }
+
+    postReply(_id, reply): Promise<any> {
+        let headers = new Headers();
+        headers.append('x-access-token', this.authenticationService.getLoginToken());
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+        console.log(JSON.stringify({_id: _id, reply: reply}));
+        return this.http.post(this.postReplyUrl, JSON.stringify({ _id: _id, reply: reply }), options)
+            .toPromise();
     }
 }

@@ -18,11 +18,10 @@
     <div class="col-xs-12">
       {{question.details}}
     </div>
-    <div class="col-xs-12 reply">
-      <a href="todo.com">Reply</a>
-    </div>
+    <forum-reply [question]="question" *ngIf="!question.reply"></forum-reply>
+    <div class="col-xs-12">Domanda già risposta</div>
     <div class="col-xs-12">
-      Vai su unibo.it, clicca qui poi lì
+      {{question.reply}}
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@ var HttpStatus = require('http-status-codes');
 
 export function getForumQuestionsHandler(req, res, db) {
     let query = req.body.query;
-    console.warn("query" + query);
+    //console.warn("query" + query);
     if (query === "") {
 
         let q = {};

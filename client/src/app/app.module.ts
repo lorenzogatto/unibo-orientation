@@ -26,6 +26,7 @@ import { UserComponent } from "./user/user.component";
 import { ForumQuestionsComponent } from "./forum/questions/forum-questions.component";
 import { ForumAskComponent } from "./forum/ask/forum-ask.component";
 import { ForumService } from "./forum/forum.service";
+import { ForumReplyComponent } from "./forum/reply/forum-reply.component";
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -53,6 +54,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       QuestionnaireResultComponent,
       ForumQuestionsComponent,
       ForumAskComponent,
+      ForumReplyComponent,
       ContactsComponent,
       UserRegisterComponent,
       UserLoginComponent,

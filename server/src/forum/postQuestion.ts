@@ -1,11 +1,13 @@
 var HttpStatus = require('http-status-codes');
 
 export function postForumQuestionHandler(req, res, db) {
+    console.warn("Post new question");
     let email = req.decoded.email;
     let username = req.decoded.username;
     let question = req.body;
     question.email = email;
     question.username = username;
+    question.reply = "";
     question.datetime = new Date().getTime();
     db.collection("forum_questions").insert(question, (err, result) => {
         if (err) {

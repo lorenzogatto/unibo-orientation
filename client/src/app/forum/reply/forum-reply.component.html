@@ -1,0 +1,10 @@
+﻿<div class="col-xs-12">
+  <a href="#" (click)="accordion($event)" class="reply-link">Reply</a>
+  <div class="reply-accordion">
+    <form (submit)="onSubmit($event)">
+      <textarea (input)="fitContent($event)" style="height: 1.75rem" name="reply" required></textarea>
+      <input type="hidden" value="{{question._id}}" name="_id" />
+      <button type="submit">Invia risposta</button>
+    </form>
+  </div>
+</div>

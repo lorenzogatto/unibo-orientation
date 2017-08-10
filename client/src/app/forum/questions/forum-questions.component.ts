@@ -14,10 +14,11 @@ import { Subject } from "rxjs/Subject";
     styleUrls: ['../../shared/forms.css', 'forum-questions.component.css']
 })
 export class ForumQuestionsComponent implements OnInit {
+    replyQuestion: any;
 
     public currentQueryString: string;
     public showedQuestions: any[];
-    private allQuestions: any[];
+    private hiddenQuestions: any[];
     private nextQueryString: string;
     private searchTerms = new Subject<string>();
     private questions: Observable<any>;
@@ -40,7 +41,7 @@ export class ForumQuestionsComponent implements OnInit {
             });
         this.questions.subscribe((next: any[]) => {
             this.currentQueryString = this.nextQueryString;
-            this.allQuestions = next;
+            this.hiddenQuestions = next;
             this.showedQuestions = next.slice(0, 10);
         });
         //this.questions.subscribe((next) => alert(next));
@@ -48,16 +49,15 @@ export class ForumQuestionsComponent implements OnInit {
     }
 
     // Push a search term into the observable stream.
-    search(term: string): void {
+    private search(term: string): void {
         this.searchTerms.next(term);
     }
 
     onScrollDown() {
         console.log('scrolled down!');
-        let newQuestions = this.allQuestions.slice(this.showedQuestions.length, this.showedQuestions.length + 10);
-        console.log(this.allQuestions);
+        let newQuestions = this.hiddenQuestions.slice(this.showedQuestions.length, this.showedQuestions.length + 10);
+        console.log(this.hiddenQuestions);
         console.log(newQuestions);
         this.showedQuestions = this.showedQuestions.concat(newQuestions);
-    }
-
+    }   
 }

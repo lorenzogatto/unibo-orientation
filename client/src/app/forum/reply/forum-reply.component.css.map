@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,WAAY;EACV,SAAS,EAAE,MAAM;;AAGnB,gBAAiB;EACf,OAAO,EAAE,IAAI;;AAGf,yBAA0B;EACxB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,QAAQ,EAAE,MAAM;EAChB,OAAO,EAAE,MAAM;EACf,aAAa,EAAE,MAAM;EACrB,MAAM,EAAE,sBAAsB",
+"sources": ["forum-reply.component.scss"],
+"names": [],
+"file": "forum-reply.component.css"
+}

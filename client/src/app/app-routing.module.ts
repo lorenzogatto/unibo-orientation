@@ -13,6 +13,7 @@ import { UserComponent } from "./user/user.component";
 import { UserInfoComponent } from "./user/info/user-info.component";
 import { ForumQuestionsComponent } from "./forum/questions/forum-questions.component";
 import { ForumAskComponent } from "./forum/ask/forum-ask.component";
+import { ForumReplyComponent } from "./forum/reply/forum-reply.component";
 
 const routes: Routes = [{
         path: 'home',
@@ -38,6 +39,9 @@ const routes: Routes = [{
     }, {
         path: 'forum/ask',
         component: ForumAskComponent
+    }, {
+        path: 'forum/reply/:id',
+        component: ForumReplyComponent
     }, {
         path: 'contacts',
         component: ContactsComponent

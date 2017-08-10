@@ -30,9 +30,10 @@ export class CoursesComponent implements OnInit {
     accordionClick(event: Event) {
         console.log(event);
         let button: any = event.target;
+        //console.log(button);
         button.classList.toggle("active");
         var panel = button.nextElementSibling;
         var xd: any = $(panel)
-        xd.slideToggle();        
+        xd.slideToggle();
     }
 }
