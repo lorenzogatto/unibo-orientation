@@ -1,6 +1,7 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "./user/authentication.service";
+import { ForumService } from "./forum/forum.service";
 
 let urls: string[] = ['/home',
     '/courses',
@@ -17,8 +18,22 @@ let urls: string[] = ['/home',
 
 })
 
-export class AppComponent {
-    constructor(public router: Router, public authenticationService: AuthenticationService) { }
+export class AppComponent implements OnInit {
+
+    newRepliesNumber: string = "";
+
+    constructor(public router: Router, public authenticationService: AuthenticationService, private forumService: ForumService,
+        private changeDetector: ChangeDetectorRef ) { }
+
+    ngOnInit(): void {
+        this.forumService.getNewRepliesNumber()
+            .subscribe((newReplies) => {
+                this.newRepliesNumber = newReplies.toString();
+                this.changeDetector.detectChanges();
+                console.log("nnn", newReplies);
+            });
+    }
+
 
     swipe(direction: string, event) {
         //alert(event.pointerType);

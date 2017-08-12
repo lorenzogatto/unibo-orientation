@@ -1,12 +1,12 @@
 ﻿<form (submit)="onSubmit()" name="ask-form" ngNativeValidate>
   <div class="row" style="margin-top:0.5rem">
     <label for="question" class="col-xs-12">Domanda:</label>
-    <input type="text" name="question" id="question" class="input col-xs-12" required />
+    <input type="text" name="question" id="question" class="input col-xs-12" required maxlength="100" />
   </div>
   <div class="row">
     <label for="details" class="col-xs-12">Dettagli:</label>
-    <new-textarea [name]="'details'" id="details" class="col-xs-12"></new-textarea>
+    <new-textarea [name]="'details'" [maxlength]="200" [identifier]="'details'" class="col-xs-12"></new-textarea>
   </div>
   <button type="submit" class="input col-xs-12 col-md-2" style="margin-top: 0.5rem">Chiedi</button>
 </form>
-<span class="error" *ngIf="error">Errore, riprovare più tardi!</span>
+<span class="error" *ngIf="error">{{error}}</span>

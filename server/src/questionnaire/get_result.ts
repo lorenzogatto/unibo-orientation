@@ -1,11 +1,15 @@
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
 
 export function getResultHandler(req, res, db) {
     let email = req.decoded.email;
     console.log(email);
     db.collection("user_answers").findOne({ email: email }, (err, result1) => {
-        if (err || !result1) {
+        if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+            return;
+        }
+        if (!result1) {
+            res.sendStatus(HttpStatus.NOT_FOUND);
             return;
         }
 
@@ -28,9 +32,6 @@ export function getResultHandler(req, res, db) {
                 result[coursesGroup].difference = difference;
             }
             result.sort((a, b) => a.difference - b.difference);
-            //console.log(result.slice(0, 3));
-            //console.log(result1);
-            //console.log(result);
             res.setHeader('Content-Type', 'application/json');
             res.send(result.slice(0, 3));
         });

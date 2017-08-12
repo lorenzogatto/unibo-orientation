@@ -2,7 +2,7 @@
   <a href="#" (click)="accordion($event)" class="reply-link">Reply</a>
   <div class="reply-accordion">
     <form (submit)="onSubmit($event)">
-      <new-textarea [name]="'reply'" [isRequired]="true"></new-textarea>
+      <new-textarea [name]="'reply'" [isRequired]="true" [maxlength]="200"></new-textarea>
       <input type="hidden" value="{{question._id}}" name="_id" />
       <button type="submit">Invia risposta</button>
     </form>

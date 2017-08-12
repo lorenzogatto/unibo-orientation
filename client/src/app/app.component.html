@@ -9,7 +9,12 @@
     <span class="bordered-text"><span class="notranslate">Q</span></span>
   </a>
   <a routerLink="/forum/questions"  [ngClass]="{active: router.url.indexOf('/forum/')==0}">
-    <span class="bordered-text"><span class="notranslate">?</span></span>
+    <span class="bordered-text">
+      <span class="notranslate">?</span>
+      <span class="notification" title="{{newRepliesNumber}} nuove risposte alle tue domande" *ngIf="newRepliesNumber">
+        {{newRepliesNumber}}
+      </span>
+    </span>
   </a>
   <a routerLink="/contacts" routerLinkActive="active">
     <span class="bordered-text"><span style="font-family:Georgia, serif" class="notranslate">i</span></span>

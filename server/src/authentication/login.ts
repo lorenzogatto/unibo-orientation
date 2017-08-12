@@ -25,9 +25,7 @@ export function loginHandler(req, res, db) {
             res.send(JSON.stringify({ feedback: "wrong password"}));
             return;
         }
-        var token = jwt.sign(user, Configuration.getJWTSecret(), {
-            expiresIn: "50m"
-        });
+        var token = jwt.sign(user, Configuration.getJWTSecret());
         let userView = {
             username: user.username,
             email: user.email

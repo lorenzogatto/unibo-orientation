@@ -64,6 +64,7 @@ function insertInDb(req, res, db) {
     newUser.salt = crypto.randomBytes(4).toString('base64');
     newUser.activated = true;//TODO send email for activation
     newUser.password = encryptPassword(newUser.password, newUser.salt);
+    newUser.notifications = 0;
     db.collection("users").insert(newUser, (err, result) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

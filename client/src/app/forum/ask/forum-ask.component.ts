@@ -8,22 +8,34 @@ import { Router } from "@angular/router";
     styleUrls: ['../../shared/forms.scss']
 })
 export class ForumAskComponent {
-    error: boolean = false;
+    error: string = "";
 
     constructor(private forumService: ForumService, private router: Router) { }
 
     onSubmit() {
-        this.error = false;
+        this.error = "";
         let form = document.forms["ask-form"];
         let question: any = {};
         question.question = form.question.value;
         question.details = form.details.value;
+        if (!this.validate(question)) return false;
         this.forumService.postQuestion(question)
             .then(v => this.router.navigateByUrl("forum/questions"))
             .catch(err => {
-                this.error = true;
+                this.error = "Errore, riprovare più tardi!";
                 console.log(err);
             });
         return false;
+    }
+
+    validate(question) {
+        question.details = question.details.trim();
+        let nlines = question.details.split(/\r\n|\r|\n/).length;
+        console.log(question.details, " asd", nlines);
+        if (nlines > 5) {
+            this.error = "Errore, i dettagli possono essere di massimo 5 righe";
+            return false;
+        }
+        return true;
     }
 }

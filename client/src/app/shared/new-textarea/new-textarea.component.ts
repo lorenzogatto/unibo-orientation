@@ -10,9 +10,12 @@ import * as $ from 'jquery';
 export class NewTextareaComponent{
 
     @Input() name: string;
+    @Input() identifier: string;
+    @Input() maxlength: number;
     @Input() isRequired: boolean;
 
-    constructor() { }
+    constructor() {
+    }
 
     fitContent(event: Event) {
         let target: any = event.target;

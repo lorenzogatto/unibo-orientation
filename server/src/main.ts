@@ -16,6 +16,8 @@ import { getResultHandler } from "./questionnaire/get_result";
 import { postForumQuestionHandler } from "./forum/postQuestion";
 import { getForumQuestionsHandler } from "./forum/getQuestions";
 import { postForumReplyHandler } from "./forum/postReply";
+import { getReplyNumberSSE } from "./notifications/notifications";
+import { resetNotifications } from "./notifications/resetNotifications";
 
 
 var app = express();
@@ -35,6 +37,9 @@ app.put('/api/user/login', (req, res) => loginHandler(req, res, db));
 app.use('/', express.static(_public));
 app.get('/home', (req, res) => res.sendFile(path.join(_public + "index.html")));
 //TODO
+
+app.get('/api/notifications/get_new_replies_number', (req, res) => getReplyNumberSSE(req, res, db));
+
 
 app.use(function (req, res, next) {
     // check header or url parameters or post parameters for token
@@ -83,6 +88,8 @@ app.put('/api/questionnaire/put_answers', (req, res) => putAnswersHandler(req, r
 
 app.post('/api/forum/post_question', (req, res) => postForumQuestionHandler(req, res, db));
 app.post('/api/forum/post_reply', (req, res) => postForumReplyHandler(req, res, db));
+app.get('/api/notifications/reset', (req, res) => resetNotifications(req, res, db));
+
 
 console.log("Connecting to MongoDB...");
 MongoClient.connect(databaseConnectionString).then((dbx) => {

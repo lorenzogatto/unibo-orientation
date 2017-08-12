@@ -1,19 +1,28 @@
 ﻿import { Component, OnInit } from '@angular/core';
 declare var google: any;
+declare var GeolocationMarker: any;
+
 @Component({
     selector: 'contacts',
     templateUrl: 'contacts.component.html',
     styleUrls: []
 })
 export class ContactsComponent implements OnInit {
+    currentPositionMarker;
+    map;
+
     ngOnInit(): void {
-        if (typeof google === "undefined") {
-            document.getElementById("google-maps").addEventListener("load", () => this.initMap());
-            
+        if (typeof GeolocationMarker === "undefined") {
+            document.getElementById("google-marker").addEventListener("load", () => {
+                this.initMap();
+                this.showCurrentPosition();
+            });
         } else {
             this.initMap();
+            this.showCurrentPosition();
         }
     }
+
     initMap() {
         let bolognaPolo = { lat: 44.496218, lng: 11.35438 };
         let cesenaPolo = { lat: 44.141192, lng: 12.244875 };
@@ -24,7 +33,9 @@ export class ContactsComponent implements OnInit {
             center: forliPolo,
             zoom: 9
         }
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        let map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        this.map = map;
+        
 
         var marker1 = new google.maps.Marker({
             position: bolognaPolo,
@@ -91,5 +102,9 @@ Via Angherà, 22 Rimini"
         marker_rimini.addListener('click', function () {
             infowindow_forli.open(map, marker_rimini);
         });
+    }
+
+    showCurrentPosition() {
+        this.currentPositionMarker = new GeolocationMarker(this.map);
     }
 }

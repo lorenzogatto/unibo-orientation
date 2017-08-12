@@ -1,6 +1,6 @@
 import { ObjectId } from "bson";
-
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
+import { addNotitication } from "../notifications/notifications";
 
 export function postForumReplyHandler(req, res, db) {
     console.warn("Updating reply");
@@ -10,6 +10,7 @@ export function postForumReplyHandler(req, res, db) {
     let reply = req.body;
     let replyText = reply.reply;
     let question_id = new ObjectId(reply._id);
+
     console.log(question_id);
     console.log(replyText);
     db.collection("forum_questions").findOneAndUpdate({ _id: question_id, reply: "" },
@@ -23,7 +24,18 @@ export function postForumReplyHandler(req, res, db) {
                 res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
                 return;
             }
-        console.log(result);
-        res.sendStatus(HttpStatus.OK);
-    });
+            console.log(result);
+            res.sendStatus(HttpStatus.OK);
+            addNotitication(result.value.email, db);
+        });
+}
+
+function validate(replyText) {
+    let text: string = replyText.trim();
+    
+    let text_lines = text.split(/\r\n|\r|\n/).length;
+    if (text.length === 0 || text.length > 200 || text_lines > 5)
+        return false;
+    }
+    return true;
 }
