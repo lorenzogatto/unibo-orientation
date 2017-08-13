@@ -15,6 +15,7 @@ export class ForumService {
 
     private postQuestionUrl = 'api/forum/post_question';
     private getQuestionsUrl = 'api/forum/get_questions';
+    private getQuestionUrl = 'api/forum/get_question';
     private postReplyUrl = 'api/forum/post_reply';
     private notificationsUrl = '/api/notifications/get_new_replies_number';
     private resetNotificationUrl = '/api/notifications/reset';
@@ -43,10 +44,17 @@ export class ForumService {
         }
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
-        console.log("reset");
         this.resetNotifications();
         return this.http.put(this.getQuestionsUrl, JSON.stringify({ query: query }), options)
             .map(response => response.json());
+    }
+
+    getQuestion(id: string): Observable<any> {
+        return this.http.get(this.getQuestionUrl + "?id=" + id)
+            .map(response => {
+                console.log(response);
+                return response.json()
+            });
     }
 
     postReply(_id, reply): Promise<any> {
@@ -64,7 +72,6 @@ export class ForumService {
     }
 
     private SSEConnect() {
-
         let email = "";
         if (this.authenticationService.getUser())
             email = this.authenticationService.getUser().email

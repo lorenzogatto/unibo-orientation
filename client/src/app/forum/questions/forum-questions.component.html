@@ -16,7 +16,9 @@
      *ngIf="!loadingError && showedQuestions != undefined">
   <div *ngFor="let question of showedQuestions" class="row question-box">
     <div class="col-xs-12 asker">Domanda da: <strong>{{question.username}}</strong></div>
-    <div class="col-xs-12" style="white-space:pre-wrap;"><strong>{{question.question}}</strong></div>
+    <div class="col-xs-12">
+      <strong  routerLink="/forum/question/{{question._id}}">{{question.question}}</strong>
+    </div>
     <div class="col-xs-12" style="white-space:pre-wrap;">{{question.details}}</div>
     <forum-reply [question]="question" *ngIf="!question.reply" class="col-xs-12"></forum-reply>
     <div class="col-xs-12" *ngIf="question.reply">

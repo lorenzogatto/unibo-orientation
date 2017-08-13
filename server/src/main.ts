@@ -4,7 +4,7 @@ var path = require('path');
 import * as HttpStatus from 'http-status-codes';
 var bodyParser = require('body-parser')
 import * as EmailValidator from 'email-validator';
-var jwt = require('jsonwebtoken');
+import * as jwt from 'jsonwebtoken';
 
 import { Configuration } from "./conf";
 import { registrationHandler } from "./authentication/addUser";
@@ -18,6 +18,7 @@ import { getForumQuestionsHandler } from "./forum/getQuestions";
 import { postForumReplyHandler } from "./forum/postReply";
 import { getReplyNumberSSE } from "./notifications/notifications";
 import { resetNotifications } from "./notifications/resetNotifications";
+import { getForumQuestionHandler } from "./forum/getQuestion";
 
 
 var app = express();
@@ -37,7 +38,7 @@ app.put('/api/user/login', (req, res) => loginHandler(req, res, db));
 app.use('/', express.static(_public));
 app.get('/home', (req, res) => res.sendFile(path.join(_public + "index.html")));
 //TODO
-
+app.get('/api/forum/get_question', (req, res) => getForumQuestionHandler(req, res, db));
 app.get('/api/notifications/get_new_replies_number', (req, res) => getReplyNumberSSE(req, res, db));
 
 

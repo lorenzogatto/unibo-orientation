@@ -34,7 +34,7 @@ function validate(replyText) {
     let text: string = replyText.trim();
     
     let text_lines = text.split(/\r\n|\r|\n/).length;
-    if (text.length === 0 || text.length > 200 || text_lines > 5)
+    if (text.length === 0 || text.length > 200 || text_lines > 5) {
         return false;
     }
     return true;

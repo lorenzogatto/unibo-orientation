@@ -5,25 +5,32 @@ import { MongoClient, Db } from "mongodb";
 var crypto = require('crypto');
 
 export function registrationHandler(req, res, db: Db) {
-    if (checkInput(req, res) === false)
+    if (validate(req, res) === false)
         return;
     isEmailInDb(req, res, db, () => isUserInDb(req, res, db, () => insertInDb(req, res, db)));
     
 }
 
-function checkInput(req, res) {
+function validate(req, res) {
     if (req.body.password === undefined || req.body.password.length < 8) {
         res.send(JSON.stringify({ feedback: "password too short" }));
         return false;
+    }
+    if (req.body.username) {
+        req.body.username = req.body.username.trim();
     }
     if (req.body.username === undefined || req.body.username.length < 1) {
         res.send(JSON.stringify({ feedback: "username not present" }));
         return false;
     }
+    if (req.body.email) {
+        req.body.email = req.body.email.trim();
+    }
     if (req.body.email === undefined || EmailValidator.validate(req.body.email) === false) {
         res.send(JSON.stringify({ feedback: "email not valid" }));
         return false;
     }
+
     return true;
 }
 

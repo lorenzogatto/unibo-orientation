@@ -31,7 +31,8 @@ export class ContactsComponent implements OnInit {
         let riminiPolo = { lat: 44.062057, lng: 12.569986 };
         var mapOptions = {
             center: forliPolo,
-            zoom: 9
+            zoom: 9,
+            gestureHandling: 'greedy'
         }
         let map = new google.maps.Map(document.getElementById("map"), mapOptions);
         this.map = map;
@@ -87,7 +88,7 @@ Via Volturno, 7 Forlì"
 Via Baccarini, 27 Ravenna"
         });
         marker_ravenna.addListener('click', function () {
-            infowindow_forli.open(map, marker_ravenna);
+            infowindow_ravenna.open(map, marker_ravenna);
         });
 
         var marker_rimini = new google.maps.Marker({
@@ -100,7 +101,7 @@ Via Baccarini, 27 Ravenna"
 Via Angherà, 22 Rimini"
         });
         marker_rimini.addListener('click', function () {
-            infowindow_forli.open(map, marker_rimini);
+            infowindow_rimini.open(map, marker_rimini);
         });
     }
 

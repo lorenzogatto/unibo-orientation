@@ -22,6 +22,9 @@ export class QuestionnaireResultComponent implements OnInit {
 
     ngOnInit(): void {
         this.questionnaireService.getResult().then(courseGroups => {
+            courseGroups[0].color = '#FFDA00'; //gold
+            courseGroups[1].color = 'silver';
+            courseGroups[2].color = '#cd7f32'; //bronze
             this.courseService.getCourses().then(courses => {
                 for (let i = 0; i < courseGroups.length; i++) {
                     courseGroups[i].courses = [];

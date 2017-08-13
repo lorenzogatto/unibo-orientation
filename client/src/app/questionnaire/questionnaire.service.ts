@@ -38,7 +38,7 @@ export class QuestionnaireService {
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.getResultUrl, options)
             .toPromise()
-            .then(response => { return response.json() as CoursesGroup[]; })
+            .then(response => { console.log(response);return response.json() as CoursesGroup[]; })
             .catch(reason => {
                 console.log(reason);
                 if (reason.status === HttpStatus.UNAUTHORIZED) {

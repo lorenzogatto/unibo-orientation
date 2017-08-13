@@ -3,6 +3,7 @@
 export class CoursesGroup {
     name: string;
     courses: Course[];
+    color: string;
 
     constructor() {
         this.courses = [];

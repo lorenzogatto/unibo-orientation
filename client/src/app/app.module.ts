@@ -29,6 +29,7 @@ import { ForumService } from "./forum/forum.service";
 import { ForumReplyComponent } from "./forum/reply/forum-reply.component";
 import { NgSpinKitModule } from 'ng-spin-kit';
 import { NewTextareaComponent } from "./shared/new-textarea/new-textarea.component";
+import { ForumDetailComponent } from "./forum/detail/forum-detail.component";
 
 delete Hammer.defaults.cssProps.userSelect;
 export class MyHammerConfig extends HammerGestureConfig {
@@ -56,6 +57,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       ForumQuestionsComponent,
       ForumAskComponent,
       ForumReplyComponent,
+      ForumDetailComponent,
       ContactsComponent,
       UserRegisterComponent,
       UserLoginComponent,
