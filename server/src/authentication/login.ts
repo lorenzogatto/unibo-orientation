@@ -17,6 +17,10 @@ export function loginHandler(req, res, db) {
             res.send(JSON.stringify({ feedback: "e-mail not used for any account"}));
             return;
         }
+        if (user.activated === false) {
+            res.send(JSON.stringify({ feedback: "account not activated" }));
+            return;
+        }
         //check password
         var db_enc_password = user.password;
         var db_salt = user.salt;

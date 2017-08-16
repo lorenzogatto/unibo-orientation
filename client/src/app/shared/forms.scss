@@ -7,16 +7,21 @@
   outline-color: #890000;
 }
 
+//to take off red borders on firefox
+input:invalid {
+  box-shadow: none;
+}
+
 .input {
   border-radius: 0.15rem;
-  border: 0.01rem solid darkgray;
+  border: 0.0625rem solid darkgray;
   padding: 0.25rem;
   outline: none;
   width: 100%;
 
   &:hover, &:active {
     border-color: darkgray;
-    box-shadow: 0 0 0.2rem darkkhaki;
+    box-shadow: 0 0 0.2rem gray;
   }
 }
 
@@ -24,3 +29,4 @@ label {
   margin-top: 0.5rem;
   margin-bottom: 0.1rem;
 }
+

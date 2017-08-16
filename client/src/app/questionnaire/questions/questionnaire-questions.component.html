@@ -6,8 +6,8 @@
   <div *ngFor="let question of questions" class="row question-row">
     <div class="col-md-10">{{question.question}}</div>
     <div class="col-md-2">
-      <input type="radio" name="{{question.question}}" value="1" required checked> Sì
-      <input type="radio" name="{{question.question}}" value="0" required> No
+      <label><input type="radio" name="{{question.question}}" value="1" required> Sì</label>
+      <label><input type="radio" name="{{question.question}}" value="0" required> No</label>
     </div>
   </div>
   <div class="col-xs-12" style="text-align:right;">

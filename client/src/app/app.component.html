@@ -1,4 +1,5 @@
-﻿<nav class="fixed-top-nav">
+﻿<notifications></notifications>
+<nav class="fixed-top-nav">
   <a routerLink="/home" routerLinkActive="active">
     <i class="fa fa-home" aria-hidden="true"></i>
   </a>
@@ -6,14 +7,11 @@
     <i class="fa fa-list" aria-hidden="true"></i>
   </a>
   <a routerLink="/questionnaire"  routerLinkActive="active">
-    <span class="bordered-text"><span class="notranslate">Q</span></span>
+    <span class="bordered-text"><span class="notranslate" style="font-family:'Raleway', sans-serif;font-weight: 500;">Q</span></span>
   </a>
   <a routerLink="/forum/questions"  [ngClass]="{active: router.url.indexOf('/forum/')==0}">
     <span class="bordered-text">
-      <span class="notranslate">?</span>
-      <span class="notification" title="{{newRepliesNumber}} nuove risposte alle tue domande" *ngIf="newRepliesNumber">
-        {{newRepliesNumber}}
-      </span>
+      <span class="notranslate" style="font-family: Arial, sans-serif;font-weight: 400;">?</span>
     </span>
   </a>
   <a routerLink="/contacts" routerLinkActive="active">

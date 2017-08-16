@@ -8,9 +8,9 @@ declare var GeolocationMarker: any;
     styleUrls: []
 })
 export class ContactsComponent implements OnInit {
-    currentPositionMarker;
-    map;
-
+    private currentPositionMarker;
+    private map;
+    
     ngOnInit(): void {
         if (typeof GeolocationMarker === "undefined") {
             document.getElementById("google-marker").addEventListener("load", () => {

@@ -1,16 +1,24 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { ForumService } from "../forum.service";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "../../user/authentication.service";
 
 @Component({
     selector: 'forum-ask',
     templateUrl: 'forum-ask.component.html',
     styleUrls: ['../../shared/forms.scss']
 })
-export class ForumAskComponent {
+export class ForumAskComponent implements OnInit {
+        
     error: string = "";
 
-    constructor(private forumService: ForumService, private router: Router) { }
+    constructor(private forumService: ForumService, private router: Router, private authenticationService: AuthenticationService) { }
+
+    ngOnInit(): void {
+        if (!this.authenticationService.isLoggedIn()) {
+            this.router.navigateByUrl("/user/login");
+        }
+    }
 
     onSubmit() {
         this.error = "";

@@ -26,7 +26,15 @@ export function postForumReplyHandler(req, res, db) {
             }
             console.log(result);
             res.sendStatus(HttpStatus.OK);
-            addNotitication(result.value.email, db);
+            let notification = {
+                _id: result.value._id,
+                type: 'newanswer',
+                data: {
+                    question: result.value.question,
+                    question_id: result.value._id
+                }
+            };
+            addNotitication(result.value.email, notification, db);
         });
 }
 

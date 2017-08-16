@@ -9,7 +9,7 @@ import * as $ from 'jquery';
 @Component({
     selector: 'questionnaire-result',
     templateUrl: 'questionnaire-result.component.html',
-    styleUrls: ['../../courses/courses.component.scss']
+    styleUrls: ['../../courses/courses.component.scss', '../../shared/forms.scss']
 })
 export class QuestionnaireResultComponent implements OnInit {
     courseGroups: CoursesGroup[];

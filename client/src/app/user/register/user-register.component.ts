@@ -14,17 +14,23 @@ export class UserRegisterComponent {
     email: string;
     emailError: string;
     password: string;
+    password2: string;
     error: string;
 
     constructor(private authenticationService: AuthenticationService, private router: Router) {
         this.username = "";
         this.password = "";
+        this.password2 = "";
         this.email = "";
     }
 
     onSubmit() {
         this.usernameError = "";
         this.emailError = "";
+
+        if (this.password !== this.password2) {
+            return false;
+        }
 
         this.authenticationService.register(this.username, this.email, this.password).then(response => {
             console.log(response);

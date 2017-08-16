@@ -1,0 +1,18 @@
+﻿.toast-top-right {
+  top: 3rem;
+  right: 0.5rem;
+}
+
+@media only screen and (min-width: 40em) {
+  .toast-top-right {
+    right: 1rem;
+  }
+}
+
+.toast-info {
+  background-color: indianred;
+}
+
+#toast-container > div {
+  opacity: 0.95;
+}

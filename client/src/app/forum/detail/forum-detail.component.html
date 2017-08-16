@@ -1,7 +1,16 @@
-﻿
-<div *ngIf="question" class="row question-box" style="margin-top:2rem;">
+﻿<sk-circle *ngIf="question === undefined && !loadingError"></sk-circle>
+<span *ngIf="loadingError" class="error">Errore nel caricamento delle domande, riprovare più tardi!</span>
+
+
+<div *ngIf="question" class="row question-box" style="margin-top:1rem;">
   <div class="col-xs-12 asker">Domanda da: <strong>{{question.username}}</strong></div>
-  <div class="col-xs-12" style="white-space:pre-wrap;"><strong>{{question.question}}</strong></div>
+  <div class="col-xs-12">
+    <strong *ngIf="detailPage" class="question">{{question.question}}</strong>
+    <a routerLink="/forum/question/{{question._id}}" style="color:black">
+      <strong *ngIf="!detailPage" class="question">{{question.question}}</strong>
+    </a>
+  </div>
+
   <div class="col-xs-12" style="white-space:pre-wrap;">{{question.details}}</div>
   <forum-reply [question]="question" *ngIf="!question.reply" class="col-xs-12"></forum-reply>
   <div class="col-xs-12" *ngIf="question.reply">

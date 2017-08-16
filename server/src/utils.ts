@@ -3,7 +3,7 @@ import { Configuration } from "./conf";
 var crypto = require('crypto');
 
 
-function sha256(data) {
+export function sha256(data) {
     return crypto.createHash("sha256").update(data).digest("base64");
 }
 

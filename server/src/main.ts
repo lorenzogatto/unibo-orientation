@@ -16,9 +16,9 @@ import { getResultHandler } from "./questionnaire/get_result";
 import { postForumQuestionHandler } from "./forum/postQuestion";
 import { getForumQuestionsHandler } from "./forum/getQuestions";
 import { postForumReplyHandler } from "./forum/postReply";
-import { getReplyNumberSSE } from "./notifications/notifications";
-import { resetNotifications } from "./notifications/resetNotifications";
+import { getNotificationsSSE } from "./notifications/notifications";
 import { getForumQuestionHandler } from "./forum/getQuestion";
+import { deleteNotification } from "./notifications/deleteNotifications";
 
 
 var app = express();
@@ -37,9 +37,14 @@ app.put('/api/user/login', (req, res) => loginHandler(req, res, db));
 
 app.use('/', express.static(_public));
 app.get('/home', (req, res) => res.sendFile(path.join(_public + "index.html")));
-//TODO
+app.get('/courses', (req, res) => res.sendFile(path.join(_public + "index.html")));
+app.get('/questionnaire*', (req, res) => res.sendFile(path.join(_public + "index.html")));
+app.get('/forum*', (req, res) => res.sendFile(path.join(_public + "index.html")));
+app.get('/contacts', (req, res) => res.sendFile(path.join(_public + "index.html")));
+app.get('/user*', (req, res) => res.sendFile(path.join(_public + "index.html")));
+
 app.get('/api/forum/get_question', (req, res) => getForumQuestionHandler(req, res, db));
-app.get('/api/notifications/get_new_replies_number', (req, res) => getReplyNumberSSE(req, res, db));
+app.get('/api/notifications/get_notifications_SSE', (req, res) => getNotificationsSSE(req, res, db));
 
 
 app.use(function (req, res, next) {
@@ -47,7 +52,6 @@ app.use(function (req, res, next) {
     var token = req.body.token || req.params['token'] || req.headers['x-access-token'];
     // decode token
     if (token) {
-        //console.log("token", token);
         // verifies secret and checks exp
         jwt.verify(token, Configuration.getJWTSecret(), function (err, decoded) {
             if (err) {
@@ -89,7 +93,7 @@ app.put('/api/questionnaire/put_answers', (req, res) => putAnswersHandler(req, r
 
 app.post('/api/forum/post_question', (req, res) => postForumQuestionHandler(req, res, db));
 app.post('/api/forum/post_reply', (req, res) => postForumReplyHandler(req, res, db));
-app.get('/api/notifications/reset', (req, res) => resetNotifications(req, res, db));
+app.delete('/api/notifications/delete', (req, res) => deleteNotification(req, res, db));
 
 
 console.log("Connecting to MongoDB...");

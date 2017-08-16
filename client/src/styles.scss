@@ -61,6 +61,13 @@ body, html {
 }
 
 a {
+  /*
+    //to override default firefox behaviour 
+    //https://stackoverflow.com/questions/4285970/css-firefox-how-to-deactivate-the-dotted-border-firefox-click-indicator
+  */
+  outline: none;
+}
+a {
   &:link {
     color: blue;
   }

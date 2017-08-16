@@ -39,22 +39,10 @@
         line-height: $nav-bar-height - 2 * $nav-bar-padding;
         font-size: $nav-bar-height - 2 * $nav-bar-padding - 2 * $border-thickness;
         display: inline-block;
-        vertical-align: text-top;
+        //vertical-align: text-top;
         position: absolute;
         left: - $border-thickness;
         top: - $border-thickness;
-      }
-
-      .notification {
-        position: absolute;
-        display: inline;
-        height: auto;
-        line-height: 0.7rem;
-        font-size: 0.9rem;
-        right: auto;
-        left: 62%;
-        top: auto;
-        bottom: - $border-thickness;
       }
     }
     //it does not work on firefox http://caniuse.com/#feat=css-media-interaction

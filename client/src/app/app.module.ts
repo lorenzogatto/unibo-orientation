@@ -30,6 +30,11 @@ import { ForumReplyComponent } from "./forum/reply/forum-reply.component";
 import { NgSpinKitModule } from 'ng-spin-kit';
 import { NewTextareaComponent } from "./shared/new-textarea/new-textarea.component";
 import { ForumDetailComponent } from "./forum/detail/forum-detail.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationsService } from "./notifications/notifications.service";
+import { NotificationsComponent } from "./notifications/notifications.component";
+//import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+
 
 delete Hammer.defaults.cssProps.userSelect;
 export class MyHammerConfig extends HammerGestureConfig {
@@ -38,11 +43,6 @@ export class MyHammerConfig extends HammerGestureConfig {
         'pinch': { enable: false },
         'rotate': { enable: false },
     };
-    /*buildHammer(element: HTMLElement): HammerInstance {
-        let mc = new Hammer(element, { touchAction: 'pan-y' });
-        mc.on('pinch', e => { alert(e);})
-        return mc;
-    }*/
 }
 
 @NgModule({
@@ -63,7 +63,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       UserLoginComponent,
       UserComponent,
       UserInfoComponent,
-      NewTextareaComponent
+      NewTextareaComponent,
+      NotificationsComponent
   ],
   imports: [
       BrowserModule,
@@ -71,7 +72,9 @@ export class MyHammerConfig extends HammerGestureConfig {
       HttpModule,
       FormsModule,
       InfiniteScrollModule,
-      NgSpinKitModule
+      NgSpinKitModule,
+      BrowserAnimationsModule,
+      //ToastModule.forRoot()
   ],
   providers: [{
       provide: HAMMER_GESTURE_CONFIG,
@@ -80,7 +83,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       CourseService,
       QuestionnaireService,
       AuthenticationService,
-      ForumService
+      ForumService,
+      NotificationsService
   ],
   bootstrap: [AppComponent]
 })

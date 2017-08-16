@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Input } from '@angular/core';
 import { ForumService } from "../forum.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { Observable } from "rxjs/Observable";
@@ -15,12 +15,20 @@ import { Subject } from "rxjs/Subject";
 })
 export class ForumDetailComponent implements OnInit {
         
-    question;
-    error: string;
+    @Input() question;
+    detailPage: boolean = true;
+    loadingError: boolean = false;
 
     constructor(private forumService: ForumService, private router: Router, private route: ActivatedRoute) { }
     ngOnInit(): void {
+        if (this.router.url.indexOf("forum/questions") != -1) {
+            this.detailPage = false;
+            return;
+        }        
         this.route.paramMap.switchMap((params: ParamMap) => this.forumService.getQuestion(params.get('id')))
-            .subscribe(question => this.question = question);
+            .subscribe(question => {
+                this.question = question;
+                this.loadingError = false;
+            }, error => this.loadingError = true);
     }
 }

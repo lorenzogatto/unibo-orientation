@@ -1,4 +1,4 @@
-import { encryptPassword } from "../utils";
+import { encryptPassword, sha256 } from "../utils";
 import * as EmailValidator from 'email-validator';
 var HttpStatus = require('http-status-codes');
 import { MongoClient, Db } from "mongodb";
@@ -69,9 +69,9 @@ function isUserInDb(req, res, db, callback) {
 function insertInDb(req, res, db) {
     var newUser = req.body;
     newUser.salt = crypto.randomBytes(4).toString('base64');
-    newUser.activated = true;//TODO send email for activation
+    newUser.activated = true;
     newUser.password = encryptPassword(newUser.password, newUser.salt);
-    newUser.notifications = 0;
+    newUser.notifications = [];
     db.collection("users").insert(newUser, (err, result) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
