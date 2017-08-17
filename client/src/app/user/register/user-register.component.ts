@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { AuthenticationService } from "../authentication.service";
 import { Router } from "@angular/router";
+declare var toastr: any;
 
 @Component({
     selector: 'user-register',
@@ -37,6 +38,7 @@ export class UserRegisterComponent {
             let res = response.json();
             let feedback: string = res.feedback;
             if (feedback === "ok") {
+                toastr.info('Clicchi sul link presente sull\'e-mail di verifica', '', { timeOut: 2500 });
                 this.router.navigateByUrl("/user/login");
             } else if (feedback.indexOf("username") != -1) {
                 this.usernameError = "Errore: username già in uso";

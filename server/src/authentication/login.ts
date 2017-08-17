@@ -21,7 +21,7 @@ export function loginHandler(req, res, db) {
             res.send(JSON.stringify({ feedback: "account not activated" }));
             return;
         }
-        //check password
+        //checking password
         var db_enc_password = user.password;
         var db_salt = user.salt;
         var expected_enc_password = encryptPassword(password, db_salt);

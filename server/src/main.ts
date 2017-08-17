@@ -20,6 +20,7 @@ import { getNotificationsSSE } from "./notifications/notifications";
 import { getForumQuestionHandler } from "./forum/getQuestion";
 import { deleteNotification } from "./notifications/deleteNotifications";
 import { deleteQuestion } from "./forum/deleteQuestion";
+import { validateEmail } from "./authentication/validate";
 
 
 var app = express();
@@ -46,6 +47,8 @@ app.get('/user*', (req, res) => res.sendFile(path.join(_public + "index.html")))
 
 app.get('/api/forum/get_question', (req, res) => getForumQuestionHandler(req, res, db));
 app.get('/api/notifications/get_notifications_SSE', (req, res) => getNotificationsSSE(req, res, db));
+
+app.get('/validate', (req, res) => validateEmail(req, res, db));
 
 
 app.use(function (req, res, next) {
