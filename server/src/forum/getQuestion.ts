@@ -1,4 +1,4 @@
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
 import { ObjectId } from "bson";
 
 
@@ -11,7 +11,10 @@ export function getForumQuestionHandler(req, res, db) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return;
         }
-        console.log(result);
-        res.send(result);
+        if (!result) {
+            res.sendStatus(HttpStatus.NOT_FOUND);
+            return;
+        }
+        res.send(JSON.stringify(result));
     });
 }

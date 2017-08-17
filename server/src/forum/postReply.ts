@@ -10,11 +10,12 @@ export function postForumReplyHandler(req, res, db) {
     let reply = req.body;
     let replyText = reply.reply;
     let question_id = new ObjectId(reply._id);
+    let reply_datetime = new Date().getTime();
 
     console.log(question_id);
     console.log(replyText);
     db.collection("forum_questions").findOneAndUpdate({ _id: question_id, reply: "" },
-        { $set: { "reply": replyText } }
+        { $set: { "reply": replyText, "reply_username": username, "reply_email": email, "reply_datetime": reply_datetime } }
         , (err, result) => {
             if (err) {
                 res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -19,6 +19,7 @@ import { postForumReplyHandler } from "./forum/postReply";
 import { getNotificationsSSE } from "./notifications/notifications";
 import { getForumQuestionHandler } from "./forum/getQuestion";
 import { deleteNotification } from "./notifications/deleteNotifications";
+import { deleteQuestion } from "./forum/deleteQuestion";
 
 
 var app = express();
@@ -93,6 +94,8 @@ app.put('/api/questionnaire/put_answers', (req, res) => putAnswersHandler(req, r
 
 app.post('/api/forum/post_question', (req, res) => postForumQuestionHandler(req, res, db));
 app.post('/api/forum/post_reply', (req, res) => postForumReplyHandler(req, res, db));
+app.delete('/api/forum/delete_question', (req, res) => deleteQuestion(req, res, db));
+
 app.delete('/api/notifications/delete', (req, res) => deleteNotification(req, res, db));
 
 

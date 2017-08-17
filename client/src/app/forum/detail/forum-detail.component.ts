@@ -8,6 +8,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { Subject } from "rxjs/Subject";
+import * as $ from 'jquery';
+import { AuthenticationService } from "../../user/authentication.service";
+declare var toastr: any;
+
 @Component({
     selector: 'forum-detail',
     templateUrl: 'forum-detail.component.html',
@@ -17,10 +21,17 @@ export class ForumDetailComponent implements OnInit {
         
     @Input() question;
     detailPage: boolean = true;
-    loadingError: boolean = false;
+    loadingError: string = "";
+    location: string;
 
-    constructor(private forumService: ForumService, private router: Router, private route: ActivatedRoute) { }
+    constructor(
+        private forumService: ForumService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public authenticationService: AuthenticationService) { }
+
     ngOnInit(): void {
+        this.location = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
         if (this.router.url.indexOf("forum/questions") != -1) {
             this.detailPage = false;
             return;
@@ -28,7 +39,59 @@ export class ForumDetailComponent implements OnInit {
         this.route.paramMap.switchMap((params: ParamMap) => this.forumService.getQuestion(params.get('id')))
             .subscribe(question => {
                 this.question = question;
-                this.loadingError = false;
-            }, error => this.loadingError = true);
+                this.loadingError = "";
+            }, error => {
+                console.log(error);
+                if (error.status === 404)
+                    this.loadingError = "Errore: domanda non trovata!";
+                else
+                  this.loadingError = "Errore nel caricamento delle domande, riprovare più tardi!";
+            });
+    }
+
+    chevronToggle(event) {
+        console.log(event);
+        let target: any = event.target;
+        if (target.tagName.toLowerCase() === "i")
+            target = target.parentNode;
+        //console.log(button);
+        target.classList.toggle("active");
+        let panel: Element = target.nextElementSibling;
+        if (!panel.classList.contains("open"))
+            this.closeOpenAccordion();
+        console.log(target);
+        var xd: any = $(panel);
+        panel.classList.toggle("open");
+        xd.slideToggle();
+        return false;
+    }
+    private closeOpenAccordion() {
+        let openElements = document.getElementsByClassName("open");
+        if (openElements.length === 0) return;
+        var xd: any = $(openElements[0]);
+        openElements[0].classList.toggle("open");
+        xd.slideUp();
+        return true;
+    }
+
+    onCopy() {
+        this.closeOpenAccordion();
+        toastr.success('Link permanente copiato nella clipboard', '', { timeOut: 1500 });
+        return true;
+    }
+
+    onDelete(question_id) {
+        let userFeedback = window.confirm("Sicuro di voler cancellare la domanda?");
+        if (userFeedback == false) return false;
+        this.forumService.deleteQuestion(question_id)
+            .then(() => {
+                let element = document.getElementById(question_id);
+                element.parentNode.removeChild(element);
+                toastr.success('Domanda eliminata', '', { timeOut: 1500 });
+            })
+            .catch((err) => {
+                toastr.error('Errore nella cancellazione della domanda', '', { timeOut: 1500 });
+                console.log(err);
+        })
     }
 }

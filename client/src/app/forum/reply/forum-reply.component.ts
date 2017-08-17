@@ -3,6 +3,7 @@ import { ForumService } from "../forum.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 
 import * as $ from 'jquery';
+import { AuthenticationService } from "../../user/authentication.service";
 @Component({
     selector: 'forum-reply',
     templateUrl: 'forum-reply.component.html',
@@ -11,9 +12,8 @@ import * as $ from 'jquery';
 export class ForumReplyComponent{
 
     @Input() question;
-    
 
-    constructor(private forumService: ForumService, private router: Router) { }
+    constructor(private forumService: ForumService, private router: Router, private authenticationService: AuthenticationService) { }
 
     accordion(event: Event) {
         console.log(event);
@@ -30,7 +30,11 @@ export class ForumReplyComponent{
         let reply = form.elements["reply"].value;
         let question_id = form.elements["_id"].value;
         this.forumService.postReply(question_id, reply)
-            .then(() => this.question.reply = reply)
+            .then(() => {
+                this.question.reply = reply;
+                this.question.reply_username = this.authenticationService.getUser().username;
+                this.question.reply_datetime = new Date().getTime();
+            })
             .catch(() => alert("OBAMA"));
         return false;
     }

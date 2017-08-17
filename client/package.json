@@ -32,6 +32,7 @@
     "json3": "^3.3.2",
     "ng-spin-kit": "^5.1.1",
     "ng2-toastr": "^4.1.2",
+    "ngx-clipboard": "^8.0.4",
     "ngx-infinite-scroll": "^0.5.1",
     "rxjs": "^5.4.1",
     "zone.js": "^0.8.14"

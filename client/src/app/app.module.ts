@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from "./notifications/notifications.service";
 import { NotificationsComponent } from "./notifications/notifications.component";
 //import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 delete Hammer.defaults.cssProps.userSelect;
@@ -74,6 +75,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       InfiniteScrollModule,
       NgSpinKitModule,
       BrowserAnimationsModule,
+      ClipboardModule
       //ToastModule.forRoot()
   ],
   providers: [{

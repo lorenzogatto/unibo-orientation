@@ -1,9 +1,25 @@
 ﻿<sk-circle *ngIf="question === undefined && !loadingError"></sk-circle>
-<span *ngIf="loadingError" class="error">Errore nel caricamento delle domande, riprovare più tardi!</span>
+<p *ngIf="loadingError" class="error">{{loadingError}}</p>
 
 
-<div *ngIf="question" class="row question-box" style="margin-top:1rem;">
-  <div class="col-xs-12 asker">Domanda da: <strong>{{question.username}}</strong></div>
+<div *ngIf="question" class="row question-box" style="margin-top:1rem;" id="{{question._id}}">
+  <div class="col-xs-11 asker">Domanda da: <strong>{{question.username}}</strong>,
+  {{question.datetime | date:'y MMM d, HH:mm'}}</div>
+  <div class="col-xs-1" style="text-align: right;position:relative;">
+    <a href="#" (click)="chevronToggle($event)">
+      <i class="fa fa-chevron-down" style="color:slategray;font-size: 0.8rem;" aria-haspopup="true" aria-label="Opzioni domanda"></i>
+    </a>
+    <div class="question-options-menu">
+      <ul>
+        <li ngxClipboard [cbContent]="location+'/forum/question/'+question._id" (click)="onCopy()">
+            <i class="fa fa-bookmark-o " aria-hidden="true" style="padding-left:0.04rem;"></i>Copia link permanente
+        </li>
+        <li (click)="onDelete(question._id)" *ngIf="authenticationService.getUser() && question.email === authenticationService.getUser().email">
+          <i class="fa fa-trash-o" aria-hidden="true"></i><span style="font-weight:bold;">Elimina</span>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="col-xs-12">
     <strong *ngIf="detailPage" class="question">{{question.question}}</strong>
     <a routerLink="/forum/question/{{question._id}}" style="color:black">
@@ -14,6 +30,7 @@
   <div class="col-xs-12" style="white-space:pre-wrap;">{{question.details}}</div>
   <forum-reply [question]="question" *ngIf="!question.reply" class="col-xs-12"></forum-reply>
   <div class="col-xs-12" *ngIf="question.reply">
-    Risposta: {{question.reply}}
+    <span style="font-size:0.8rem;">Risposta da <strong>{{question.reply_username}}</strong>, {{question.reply_datetime | date:'y MMM d, HH:mm'}}</span><br/>
+    {{question.reply}}
   </div>
 </div>

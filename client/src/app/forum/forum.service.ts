@@ -14,8 +14,9 @@ export class ForumService {
     private getQuestionsUrl = 'api/forum/get_questions';
     private getQuestionUrl = 'api/forum/get_question';
     private postReplyUrl = 'api/forum/post_reply';
+    private deleteQuestionUrl = 'api/forum/delete_question';
 
-    constructor(private http: Http, private authenticationService: AuthenticationService) {}
+    constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
     postQuestion(question): Promise<any> {
         let headers = new Headers();
@@ -52,8 +53,17 @@ export class ForumService {
         headers.append('x-access-token', this.authenticationService.getLoginToken());
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
-        console.log(JSON.stringify({_id: _id, reply: reply}));
+        console.log(JSON.stringify({ _id: _id, reply: reply }));
         return this.http.post(this.postReplyUrl, JSON.stringify({ _id: _id, reply: reply }), options)
+            .toPromise();
+    }
+
+    deleteQuestion(_id): Promise<any> {
+        let headers = new Headers();
+        headers.append('x-access-token', this.authenticationService.getLoginToken());
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+        return this.http.delete(this.deleteQuestionUrl + "?id=" + _id, options)
             .toPromise();
     }
 }
