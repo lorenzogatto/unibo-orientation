@@ -14,7 +14,6 @@
      [infiniteScrollThrottle]="500"
      (scrolled)="onScrollDown()"
      *ngIf="!loadingError && showedQuestions != undefined">
-  
   <forum-detail *ngFor="let question of showedQuestions" [question]="question"></forum-detail>
   <div *ngIf="showedQuestions.length === 0">Non ci sono risultati</div>
 </div>

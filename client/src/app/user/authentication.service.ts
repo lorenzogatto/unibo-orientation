@@ -2,12 +2,23 @@
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from "@angular/core";
 
+/**
+ * Service to manage authentication.
+ * It allows to register, login, logout, ecc..
+ * If a user is logged there will be a token saved locally.
+ */
 @Injectable()
 export class AuthenticationService {
     private registrationUrl = 'api/user/register';
     private loginUrl = 'api/user/login';
     constructor(private http: Http) { }
 
+    /**
+     * Register a new user
+     * @param username
+     * @param email
+     * @param password
+     */
     register(username, email, password) {
         let newUser = {
             username: username,
@@ -20,6 +31,7 @@ export class AuthenticationService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.registrationUrl, JSON.stringify(newUser), options).toPromise();
     }
+
 
     login(email, password) {
         let user = {
@@ -45,11 +57,15 @@ export class AuthenticationService {
             });
     }
 
-    getLoginToken() {
+    /**
+     * If a user is logged in there will be a token saved locally.
+     * It is needed to authenticate in some pages by putting it in 'x-access-token' header.
+     */
+    getLoginToken(): string {
         return localStorage.getItem("token");
     }
 
-    getUser() {
+    getUser(): string {
         return JSON.parse(localStorage.getItem("user"));
     }
 

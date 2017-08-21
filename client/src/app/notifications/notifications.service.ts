@@ -7,23 +7,34 @@ import { AuthenticationService } from "../user/authentication.service";
 import { CoursesGroup } from "../shared/CoursesGroup";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
-
+import { Notification } from './notification'
 declare var EventSource: any
+
+/**
+ * Notification service, using Server-sent events.
+ * Does not work in IE/Edge, so notification will not show up with those browsers.
+ */
 @Injectable()
 export class NotificationsService {
     private notificationsUrl = '/api/notifications/get_notifications_SSE';
     private deleteNotificationUrl = '/api/notifications/delete';
-    private notificationsSubject: Subject<number>;
+    private notificationsSubject: Subject<Notification>;
 
     constructor(private http: Http, private authenticationService: AuthenticationService) {
-        this.notificationsSubject = new Subject<number>();
+        this.notificationsSubject = new Subject<Notification>();
         this.SSEConnect();
     }
 
-    public getNotifications(): Observable<any> {
+    /**
+     * Get an observable of notifications.
+     */
+    public getNotifications(): Observable<Notification> {
         return this.notificationsSubject;
     }
 
+    /**
+     * Connect to SSE source. It will reconnect automatically if needed.
+     */
     private SSEConnect() {
         let email = "";
         if (this.authenticationService.getUser())
@@ -44,6 +55,10 @@ export class NotificationsService {
         }
     }
 
+    /**
+     * Delete a notification remotely so that it will not appear again.
+     * @param notification_id
+     */
     public deleteNotification(notification_id: string) {
         let headers = new Headers();
         let token = this.authenticationService.getLoginToken();

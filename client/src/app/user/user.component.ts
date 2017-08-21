@@ -16,9 +16,5 @@ export class UserComponent implements OnInit {
         } else {
             this.router.navigateByUrl("/user/login");
         }
-
     }
-
-
-
 }

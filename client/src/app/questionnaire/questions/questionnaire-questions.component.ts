@@ -3,6 +3,7 @@ import { AppRoutingModule } from "./../../app-routing.module";
 import { Router } from "@angular/router";
 import { Question } from "../question";
 import { QuestionnaireService } from "../questionnaire.service";
+declare var toastr: any;
 
 @Component({
     selector: 'questionnaire-questions',
@@ -26,9 +27,12 @@ export class QuestionnaireQuestionsComponent implements OnInit {
                 } else {
                     this.loadingError = true;
                 }
-            });//TODO
+            });
     }
 
+    /**
+     * When user submits result
+     */
     onSubmit() {
         let answers = {};
         let form: HTMLElement = document["questionnaire-form"]
@@ -38,9 +42,12 @@ export class QuestionnaireQuestionsComponent implements OnInit {
                 answers[inputs[i].name] = parseInt(inputs[i].value);
         }
         this.questionnaireService.putAnswers(answers).
-            then((x) => {
+            then(() => {
                 this.router.navigateByUrl("questionnaire/result")
-            }).catch(e => console.log(e));//TODO print error
+            }).catch(err => {
+                console.log(err);
+                toastr.error('Errore, riprovare più tardi', '', { timeOut: 2500 })
+            });
         return false;
     }
 

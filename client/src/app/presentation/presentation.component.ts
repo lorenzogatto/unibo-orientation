@@ -2,8 +2,7 @@
 
 @Component({
     selector: 'presentation',
-    templateUrl: './presentation.component.html',
-    styleUrls: ['presentation.component.scss']
+    templateUrl: './presentation.component.html'
 })
 export class PresentationComponent {
 }

@@ -17,16 +17,7 @@ export class CourseService {
 
     getCoursesBySchool(): Promise<School[]> {
         return this.getCourses().then((courses) => {
-            let schools = {};
-            /*for (let i = 0; i < courses.length; i++) {
-                let schoolName = courses[i].school.name;
-                let schoolIndex = -1;
-                for (let s = 0; s < schools.length; s++) {
-                    if (schools[s].name == schoolName)
-                        schoolIndex = s;
-                }
-
-            }*/
+            let schools = {};//map from school name to school object
             for (let i = 0; i < courses.length; i++) {
                 let schoolName = courses[i].school.name;
                 if (schools[schoolName] === undefined) {

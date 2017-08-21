@@ -22,6 +22,5 @@ export class QuestionnaireComponent implements OnInit {
                   this.router.navigateByUrl("/questionnaire/home");
             });
     }
-
-
+    
 }

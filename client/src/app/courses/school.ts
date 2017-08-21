@@ -2,9 +2,5 @@
 import { CoursesGroup } from "../shared/CoursesGroup";
 
 export class School extends CoursesGroup{
-    color: string;
-
-    constructor() {
-        super();
-    }
+//for the moment it's just the same as a CourseGroup
 }

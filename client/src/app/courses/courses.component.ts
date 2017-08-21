@@ -34,7 +34,7 @@ export class CoursesComponent implements OnInit {
         //console.log(button);
         button.classList.toggle("active");
         var panel = button.nextElementSibling;
-        var xd: any = $(panel)
-        xd.slideToggle();
+        var jPanel: any = $(panel)
+        jPanel.slideToggle();
     }
 }

@@ -13,6 +13,9 @@ export class QuestionnaireService {
     private putAnswersUrl = 'api/questionnaire/put_answers';
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
+    /**
+     * Get questions
+     */
     getQuestions(): Promise<Question[]> {
         let headers = new Headers();
         headers.append('x-access-token', this.authenticationService.getLoginToken());
@@ -22,6 +25,11 @@ export class QuestionnaireService {
             .then(response => response.json().data as Question[]);
     }
 
+    /**
+     * Sends answers to server
+     * @param answers An object that maps question text to answer as boolean
+     * Eg. {'ABC?': 1, 'DEF': 0}
+     */
     putAnswers(answers): Promise<any> {
         let headers = new Headers();
         headers.append('x-access-token', this.authenticationService.getLoginToken());
@@ -32,6 +40,9 @@ export class QuestionnaireService {
             .toPromise();
     }
 
+    /**
+     * Get TOP 3 courses groups that the student should consider.
+     */
     getResult(): Promise<CoursesGroup[]> {
         let headers = new Headers();
         headers.append('x-access-token', this.authenticationService.getLoginToken());

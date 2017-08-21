@@ -28,7 +28,8 @@ export class ForumDetailComponent implements OnInit {
         private forumService: ForumService,
         private router: Router,
         private route: ActivatedRoute,
-        public authenticationService: AuthenticationService) { }
+        public authenticationService: AuthenticationService) {
+    }
 
     ngOnInit(): void {
         this.location = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
@@ -49,37 +50,55 @@ export class ForumDetailComponent implements OnInit {
             });
     }
 
+    /**
+     * When user clicks on pointing down arrow on the right part of a question
+     * @param event
+     */
     chevronToggle(event) {
-        console.log(event);
+        //console.log(event);
         let target: any = event.target;
+        //sometimes the target is the "i" element inside the outer "a" element and I always want it to be the outer "a" element
         if (target.tagName.toLowerCase() === "i")
             target = target.parentNode;
         //console.log(button);
         target.classList.toggle("active");
         let panel: Element = target.nextElementSibling;
-        if (!panel.classList.contains("open"))
+        //If I'm opening an accordion, first close any open accordion there might be
+        if (!panel.classList.contains("open")) {
             this.closeOpenAccordion();
+        }
         console.log(target);
-        var xd: any = $(panel);
+        var jPanel: any = $(panel);
         panel.classList.toggle("open");
-        xd.slideToggle();
+        jPanel.slideToggle();
         return false;
     }
+    /**
+     * Finds and close the open accordion.
+     * The code in this class makes sure there is always at most one open
+     */
     private closeOpenAccordion() {
         let openElements = document.getElementsByClassName("open");
         if (openElements.length === 0) return;
-        var xd: any = $(openElements[0]);
+        var jPanel: any = $(openElements[0]);
         openElements[0].classList.toggle("open");
-        xd.slideUp();
+        jPanel.slideUp();
         return true;
     }
 
+    /**
+     * Copy on clipboard button click event listener
+     */
     onCopy() {
         this.closeOpenAccordion();
         toastr.success('Link permanente copiato nella clipboard', '', { timeOut: 1500 });
         return true;
     }
 
+    /**
+     * Delete question listener
+     * @param question_id
+     */
     onDelete(question_id) {
         let userFeedback = window.confirm("Sicuro di voler cancellare la domanda?");
         if (userFeedback == false) return false;

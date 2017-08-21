@@ -20,13 +20,11 @@ export class UserLoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private router: Router,
         private activatedRoute: ActivatedRoute) {
-
         this.password = "";
         this.email = "";
     }
 
     ngOnInit(): void {
-        console.log("Accan");
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             console.log(typeof params['validate']);
             let isValidate: boolean = typeof params['validate'] !== "undefined";
@@ -56,10 +54,7 @@ export class UserLoginComponent implements OnInit {
             }
         }).catch(error => {
             console.log(error);
-            if (error.status !== undefined) {
-                this.error = "Errore durante il login, riprova più tardi!";
-            }
+            this.error = "Errore durante il login, riprova più tardi!";
         });
-        console.log(this.password, this.email);
     }
 }

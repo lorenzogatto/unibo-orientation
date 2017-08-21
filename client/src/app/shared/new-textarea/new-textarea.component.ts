@@ -1,7 +1,10 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
-
 import * as $ from 'jquery';
+
+/**
+ * A textarea that automatically fits the content as it gets written.
+ */
 @Component({
     selector: 'new-textarea',
     templateUrl: 'new-textarea.component.html',

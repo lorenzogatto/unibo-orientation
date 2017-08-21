@@ -1,9 +1,10 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { ForumService } from "../forum.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
-
-import * as $ from 'jquery';
 import { AuthenticationService } from "../../user/authentication.service";
+import * as $ from 'jquery';
+declare var toastr: any;
+
 @Component({
     selector: 'forum-reply',
     templateUrl: 'forum-reply.component.html',
@@ -19,14 +20,13 @@ export class ForumReplyComponent{
         console.log(event);
         let button: any = event.target;
         var panel = button.nextElementSibling;
-        var xd: any = $(panel)
-        xd.slideToggle();
+        var jPanel: any = $(panel)
+        jPanel.slideToggle();
         return false;
     }
 
-    onSubmit(x) {
-        let form: HTMLFormElement = x.target;
-        console.log(x);
+    onSubmit(event) {
+        let form: HTMLFormElement = event.target;
         let reply = form.elements["reply"].value;
         let question_id = form.elements["_id"].value;
         this.forumService.postReply(question_id, reply)
@@ -35,7 +35,7 @@ export class ForumReplyComponent{
                 this.question.reply_username = this.authenticationService.getUser().username;
                 this.question.reply_datetime = new Date().getTime();
             })
-            .catch(() => alert("OBAMA"));
+            .catch(() => toastr.error('Errore, riprovare più tardi', '', { timeOut: 2500 }));
         return false;
     }
 }

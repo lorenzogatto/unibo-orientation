@@ -31,7 +31,12 @@ export class AppComponent {
         public authenticationService: AuthenticationService) {
     }
 
-    swipe(direction: string, event) {
+    /**
+     * Listens to the swipe event from hammerJS
+     * @param direction
+     * @param event
+     */
+    swipe(event) {
         //alert(event.pointerType);
         console.log(event);
         if (this.fromMap(event)) return;
@@ -41,7 +46,7 @@ export class AppComponent {
             console.log("Url not found in array");
             return;
         }
-        if (direction === 'left') {
+        if (event.type === 'swipeleft') {
             index = Math.min(index + 1, urlsMatch.length - 1);
         } else {
             index = Math.max(index - 1, 0);

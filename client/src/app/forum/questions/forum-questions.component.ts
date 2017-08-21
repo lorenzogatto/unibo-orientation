@@ -27,7 +27,7 @@ export class ForumQuestionsComponent implements OnInit {
     constructor(private forumService: ForumService, private router: Router) { }
     ngOnInit(): void {
         this.questions = this.searchTerms
-            //.debounceTime(300)        // wait 300ms after each keystroke before considering the term
+            //.debounceTime(300)        // wait 300ms after each keystroke before considering the term. Commented because annoying
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(query => { // switch to new observable each time the term changes
                 this.nextQueryString = query;
@@ -53,6 +53,7 @@ export class ForumQuestionsComponent implements OnInit {
 
     onScrollDown() {
         console.log('scrolled down!');
+        //newQuestions is a subarray of hidden questions array
         let newQuestions = this.hiddenQuestions.slice(this.showedQuestions.length, this.showedQuestions.length + 10);
         console.log(this.hiddenQuestions);
         console.log(newQuestions);

@@ -36,8 +36,8 @@ export class QuestionnaireResultComponent implements OnInit {
                     }
                 }
                 this.courseGroups = courseGroups;
-            }).catch(reason => { alert(reason); this.loadingError = true; });
-        }).catch(reason => {alert(reason); this.loadingError = true;});
+            }).catch(reason => { console.log(reason); this.loadingError = true; });
+        }).catch(reason => { console.log(reason); this.loadingError = true;});
     }
 
     accordionClick(event: Event) {
@@ -45,8 +45,8 @@ export class QuestionnaireResultComponent implements OnInit {
         let button: any = event.target;
         button.classList.toggle("active");
         var panel = button.nextElementSibling;
-        var xd: any = $(panel)
-        xd.slideToggle();
+        var jPanel: any = $(panel)
+        jPanel.slideToggle();
     }
 
 

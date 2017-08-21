@@ -9,10 +9,14 @@ import { AuthenticationService } from "../../user/authentication.service";
     styleUrls: ['../../shared/forms.scss']
 })
 export class ForumAskComponent implements OnInit {
-        
+
     error: string = "";
 
-    constructor(private forumService: ForumService, private router: Router, private authenticationService: AuthenticationService) { }
+    constructor(
+        private forumService: ForumService,
+        private router: Router,
+        private authenticationService: AuthenticationService) {
+    }
 
     ngOnInit(): void {
         if (!this.authenticationService.isLoggedIn()) {
@@ -20,6 +24,9 @@ export class ForumAskComponent implements OnInit {
         }
     }
 
+    /**
+     * When the user asks a question
+     */
     onSubmit() {
         this.error = "";
         let form = document.forms["ask-form"];
@@ -36,11 +43,11 @@ export class ForumAskComponent implements OnInit {
         return false;
     }
 
-    validate(question) {
+    validate(question) { //beyond HTML5 validation
         question.details = question.details.trim();
-        let nlines = question.details.split(/\r\n|\r|\n/).length;
-        console.log(question.details, " asd", nlines);
-        if (nlines > 5) {
+        let nLines = question.details.split(/\r\n|\r|\n/).length;
+        console.log(question.details, " asd", nLines);
+        if (nLines > 5) {
             this.error = "Errore, i dettagli possono essere di massimo 5 righe";
             return false;
         }

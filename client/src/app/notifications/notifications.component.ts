@@ -17,33 +17,19 @@ export class NotificationsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "showDuration": "0",
-            "hideDuration": "1000",
-            "timeOut": "0",
-            "extendedTimeOut": "0",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-
         this.notificationsService.getNotifications()
             .subscribe((notification) => {
+                console.log("New notification", notification);
                 if (notification.type === "newanswer") {
                     toastr.info('Nuova risposta per la domanda ' + notification.data.question,
                         '', {
                             onclick: () => this.changeUrl(notification.data.question_id),
                             onHidden: () => this.notificationsService.deleteNotification(notification._id)
                         });
+                } else {
+                    console.error("Unknown notification type");
                 }
-                console.log("nnn", notification);
+                
             });
     }
 

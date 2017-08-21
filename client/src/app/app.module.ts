@@ -1,5 +1,5 @@
 ﻿import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ContactsComponent } from "./contacts/contacts.component";
@@ -33,9 +33,8 @@ import { ForumDetailComponent } from "./forum/detail/forum-detail.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from "./notifications/notifications.service";
 import { NotificationsComponent } from "./notifications/notifications.component";
-//import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ClipboardModule } from 'ngx-clipboard';
-
+declare var toastr: any;
 
 delete Hammer.defaults.cssProps.userSelect;
 export class MyHammerConfig extends HammerGestureConfig {
@@ -44,6 +43,23 @@ export class MyHammerConfig extends HammerGestureConfig {
         'pinch': { enable: false },
         'rotate': { enable: false },
     };
+}
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": true,
+    "showDuration": "0",
+    "hideDuration": "1000",
+    "timeOut": "0",
+    "extendedTimeOut": "0",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
 }
 
 @NgModule({
@@ -82,6 +98,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
   },
+      { provide: LOCALE_ID, useValue: "it-IT" },
       CourseService,
       QuestionnaireService,
       AuthenticationService,

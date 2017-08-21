@@ -11,7 +11,7 @@
     <input type="password" [(ngModel)]="password" class="col-xs-12 input"  minlength="8" required name="password"/>
     <label class="col-xs-12">Reinserisci password: </label>
     <input type="password" [(ngModel)]="password2" class="col-xs-12 input" minlength="8" required name="password2" />
-    <div class="error" *ngIf="password !== password2">Errore, le password non coincidono</div>
+    <div class="error" *ngIf="password !== password2 && password2 !== ''">Errore, le password non coincidono</div>
   </div>
   <button type="submit">Registra</button>
   <span style="margin-left: 1rem;">Hai già un account? <a routerLink="/user/login">Login</a></span>
