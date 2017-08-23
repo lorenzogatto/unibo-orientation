@@ -1,21 +1,29 @@
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function getForumQuestionsHandler(req, res, db) {
+/**
+ * Get questions from the database.
+ * If user is not logged in, the last 100 questions are retrieved.
+ * Otherwise, the user's question are returned first and the last questions afterwards (until reaching 100).
+ * @param req
+ * @param res
+ * @param db
+ */
+export function getForumQuestionsHandler(req: Request, res: Response, db: Db) {
     let query = req.body.query;
-    //console.warn("query" + query);
     if (query === "") {
-
         let q = {};
-        if (req.decoded) {
-            q = { username: { $ne: req.decoded.username } };
+        if ((<any>req).decoded) {
+            q = { username: { $ne: (<any>req).decoded.username } };
         }
         db.collection("forum_questions").find(q).sort({ datetime: -1 }).limit(100).toArray(function (err, result) {
             if (err) {
                 res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
                 return;
             }
-            if (req.decoded) {
-                let username = req.decoded.username;
+            if ((<any>req).decoded) {
+            let username = (<any>req).decoded.username;
                 db.collection("forum_questions").find({ username: username }).sort({ datetime: -1 }).limit(100).toArray(function (err, result2: any[]) {
                     if (err) {
                         res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

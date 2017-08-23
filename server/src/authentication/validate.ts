@@ -1,7 +1,14 @@
 import * as HttpStatus from 'http-status-codes';
-import * as express from "express";
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function validateEmail(req: express.Request, res: express.Response, db) {
+/**
+ * Function called when the user clicks the link he receives by e-mail.
+ * @param req
+ * @param res
+ * @param db
+ */
+export function validateEmail(req: Request, res: Response, db: Db) {
     var token = req.query["token"];
     console.log(token);
     db.collection("users").findOneAndUpdate({ activationToken: token }, { $set: { activated: true } }, (err, user) => {

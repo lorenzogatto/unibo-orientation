@@ -1,12 +1,20 @@
 import { ObjectId } from "bson";
 import * as HttpStatus from 'http-status-codes';
 import { addNotitication } from "../notifications/notifications";
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function postForumReplyHandler(req, res, db) {
+/**
+ * Post a reply to a question
+ * @param req
+ * @param res
+ * @param db
+ */
+export function postForumReplyHandler(req: Request, res: Response, db: Db) {
     console.warn("Updating reply");
-    let email = req.decoded.email;
+    let email = (<any>req).decoded.email;
     //TODO only unibo e-mails
-    let username = req.decoded.username;
+    let username = (<any>req).decoded.username;
     let reply = req.body;
     let replyText = reply.reply;
     let question_id = new ObjectId(reply._id);
@@ -39,7 +47,11 @@ export function postForumReplyHandler(req, res, db) {
         });
 }
 
-function validate(replyText) {
+/**
+ * Validate user data before inserting a new reply.
+ * @param replyText
+ */
+function validate(replyText: string) {
     let text: string = replyText.trim();
     
     let text_lines = text.split(/\r\n|\r|\n/).length;

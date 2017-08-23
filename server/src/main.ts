@@ -1,8 +1,8 @@
 ﻿import * as express from "express";
 import { MongoClient, Db } from "mongodb";
-var path = require('path');
+import * as path from 'path';
 import * as HttpStatus from 'http-status-codes';
-var bodyParser = require('body-parser')
+import * as bodyParser from 'body-parser';
 import * as EmailValidator from 'email-validator';
 import * as jwt from 'jsonwebtoken';
 

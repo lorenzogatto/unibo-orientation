@@ -1,16 +1,16 @@
 ﻿<h2>Registrazione</h2>
 <form method="get" action="?" (submit)="onSubmit()" ngNativeValidate>
   <div class="row">
-    <label class="col-xs-12" style="margin-top:0">Username: </label>
-    <input type="text" [(ngModel)]="username" class="col-xs-12 input" required name="username"/>
+    <label class="col-xs-12" style="margin-top:0" for="username">Username: </label>
+    <input type="text" [(ngModel)]="username" class="col-xs-12 input" required name="username" id="username"/>
     <div class="error">{{usernameError}}</div>
-    <label class="col-xs-12">E-mail: </label>
-    <input type="email" [(ngModel)]="email" (input)="emailError = ''" class="col-xs-12 input" required name="email"/>
+    <label class="col-xs-12" for="email">E-mail: </label>
+    <input type="email" [(ngModel)]="email" (input)="emailError = ''" class="col-xs-12 input" required name="email" id="email"/>
     <div class="error">{{emailError}}</div>
-    <label class="col-xs-12">Password: </label>
-    <input type="password" [(ngModel)]="password" class="col-xs-12 input"  minlength="8" required name="password"/>
-    <label class="col-xs-12">Reinserisci password: </label>
-    <input type="password" [(ngModel)]="password2" class="col-xs-12 input" minlength="8" required name="password2" />
+    <label class="col-xs-12" for="password">Password: </label>
+    <input type="password" [(ngModel)]="password" class="col-xs-12 input"  minlength="8" required name="password" id="password"/>
+    <label class="col-xs-12" for="password2">Reinserisci password: </label>
+    <input type="password" [(ngModel)]="password2" class="col-xs-12 input" minlength="8" required name="password2" id="password2"/>
     <div class="error" *ngIf="password !== password2 && password2 !== ''">Errore, le password non coincidono</div>
   </div>
   <button type="submit">Registra</button>

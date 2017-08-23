@@ -1,7 +1,9 @@
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function putAnswersHandler(req, res, db) {
-    let email = req.decoded.email;
+export function putAnswersHandler(req: Request, res: Response, db: Db) {
+    let email = (<any>req).decoded.email;
     db.collection("user_answers").remove({email: email}, (err, result) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,6 +1,8 @@
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function getCoursesHandler(req, res, db) {
+export function getCoursesHandler(req: Request, res: Response, db: Db) {
     console.time("db get courses");
     db.collection("courses").find().toArray((err, result) => {
         if (err) {

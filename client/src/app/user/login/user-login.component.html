@@ -1,11 +1,11 @@
 ﻿<h2>Login</h2>
 <form method="get" action="?" (submit)="onSubmit()" ngNativeValidate>
   <div class="row">
-    <label class="col-xs-12" style="margin-top:0">E-mail: </label>
-    <input type="email" [(ngModel)]="email" (input)="emailError = ''" class="col-xs-12 input" required name="email"/>
+    <label class="col-xs-12" style="margin-top:0" for="email">E-mail: </label>
+    <input type="email" [(ngModel)]="email" (input)="emailError = ''" class="col-xs-12 input" required name="email" id="email"/>
     <div class="error">{{emailError}}</div>
-    <label class="col-xs-12">Password: </label>
-    <input type="password" [(ngModel)]="password" class="col-xs-12 input"  required name="password"/>
+    <label class="col-xs-12" for="password">Password: </label>
+    <input type="password" [(ngModel)]="password" class="col-xs-12 input"  required name="password" id="password"/>
     <div class="error">{{passwordError}}</div>
   </div>
   <button type="submit">Login</button>

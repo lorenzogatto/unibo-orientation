@@ -1,23 +1,23 @@
 ﻿<notifications></notifications>
 <nav class="fixed-top-nav">
-  <a routerLink="/home" routerLinkActive="active">
+  <a routerLink="/home" routerLinkActive="active" aria-label="Home">
     <i class="fa fa-home" aria-hidden="true"></i>
   </a>
-  <a routerLink="/courses" routerLinkActive="active">
+  <a routerLink="/courses" routerLinkActive="active" aria-label="Corsi">
     <i class="fa fa-list" aria-hidden="true"></i>
   </a>
-  <a routerLink="/questionnaire"  routerLinkActive="active">
+  <a routerLink="/questionnaire"  routerLinkActive="active" aria-label="Questionario">
     <span class="bordered-text"><span class="notranslate" style="font-family:'Raleway', sans-serif;font-weight: 500;">Q</span></span>
   </a>
-  <a routerLink="/forum/questions"  [ngClass]="{active: router.url.indexOf('/forum/')==0}">
+  <a routerLink="/forum/questions"  [ngClass]="{active: router.url.indexOf('/forum/')==0}" aria-label="Domande al personale">
     <span class="bordered-text">
       <span class="notranslate" style="font-family: Arial, sans-serif;font-weight: 400;">?</span>
     </span>
   </a>
-  <a routerLink="/contacts" routerLinkActive="active">
+  <a routerLink="/contacts" routerLinkActive="active" aria-label="Contatti">
     <span class="bordered-text"><span style="font-family:Georgia, serif" class="notranslate">i</span></span>
   </a>
-  <a routerLink="/user/info" [ngClass]="{active: router.url.indexOf('/user/')==0}">
+  <a routerLink="/user/info" [ngClass]="{active: router.url.indexOf('/user/')==0}" aria-label="User">
     <i *ngIf="!this.authenticationService.getLoginToken()" class="fa fa-user-secret" aria-hidden="true"></i>
     <i *ngIf="this.authenticationService.getLoginToken()" class="fa fa-user-circle" aria-hidden="true"></i>
   </a>

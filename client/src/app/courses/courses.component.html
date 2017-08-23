@@ -3,7 +3,7 @@
 <span *ngIf="loadingError" class="error">Errore nel caricamento dei corsi, riprovare più tardi!</span>
 <section>
   <ng-container *ngFor="let school of schools">
-    <button class="school accordion" (click)="accordionClick($event);">
+    <button class="school accordion" (click)="accordionClick($event);" aria-label="Clicca per estendere">
       <span class="toggle" [style.color]="school.color"></span>
       {{school.name}}
     </button>

@@ -46,9 +46,11 @@ export class UserLoginComponent implements OnInit {
             if (feedback === "ok") {
                 this.router.navigateByUrl("/home");
             } else if (feedback.indexOf("e-mail") !== -1) {
-                this.emailError = "Errore: " + feedback;
+                this.emailError = "Errore: indirizzo e-mail non registrato";
             } else if (feedback.indexOf("password") !== -1) {
-                this.passwordError = "Errore: " + feedback;
+                this.passwordError = "Errore: password errata";
+            } else if (feedback.indexOf("activated") !== -1) {
+                this.passwordError = "Errore: account non attivato";
             } else {
                 this.error = "Errore: " + feedback;
             }

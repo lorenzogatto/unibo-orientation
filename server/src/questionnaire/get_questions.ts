@@ -1,6 +1,14 @@
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function getQuestionsHandler(req, res, db) {
+/**
+ * Get questionnaire questions.
+ * @param req
+ * @param res
+ * @param db
+ */
+export function getQuestionsHandler(req: Request, res: Response, db: Db) {
     console.time("dbQuery");
     db.collection("questions").find().toArray((err, result) => {
         if (err) {

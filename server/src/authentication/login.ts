@@ -1,10 +1,18 @@
 import * as HttpStatus from 'http-status-codes';
-var jwt = require('jsonwebtoken');
-
+import * as jwt from 'jsonwebtoken';
+import { Request, Response } from "express";
 import { encryptPassword } from "../utils";
 import { Configuration } from "../conf";
+import { Db } from "mongodb";
 
-export function loginHandler(req, res, db) {
+/**
+ * Checks the presence of a user and its password saved in the database.
+ * Returns a JWT tokento the user if login succeeded.
+ * @param req
+ * @param res
+ * @param db
+ */
+export function loginHandler(req: Request, res: Response, db: Db) {
     var email = req.body.email;
     var password = req.body.password;
     db.collection("users").findOne({ email: email }, (err, user) => {

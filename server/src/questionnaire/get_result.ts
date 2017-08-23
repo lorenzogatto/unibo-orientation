@@ -1,7 +1,15 @@
 import * as HttpStatus from 'http-status-codes';
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-export function getResultHandler(req, res, db) {
-    let email = req.decoded.email;
+/**
+ * Get result of the questionnaire.
+ * @param req
+ * @param res
+ * @param db
+ */
+export function getResultHandler(req: Request, res: Response, db: Db) {
+    let email = (<any>req).decoded.email;
     console.log(email);
     db.collection("user_answers").findOne({ email: email }, (err, result1) => {
         if (err) {

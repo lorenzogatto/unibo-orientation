@@ -1,8 +1,15 @@
 import * as HttpStatus from 'http-status-codes';
 import { ObjectId } from "bson";
+import { Request, Response } from "express";
+import { Db } from "mongodb";
 
-
-export function getForumQuestionHandler(req, res, db) {
+/**
+ * Get a question by req.query["id"] from the database
+ * @param req
+ * @param res
+ * @param db
+ */
+export function getForumQuestionHandler(req: Request, res: Response, db: Db) {
     let id = req.query["id"];
     let _id = new ObjectId(id);
     console.log(id);

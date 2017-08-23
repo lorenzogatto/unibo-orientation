@@ -65,7 +65,7 @@ export class AuthenticationService {
         return localStorage.getItem("token");
     }
 
-    getUser(): string {
+    getUser(): any {
         return JSON.parse(localStorage.getItem("user"));
     }
 

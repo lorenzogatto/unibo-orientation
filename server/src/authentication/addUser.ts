@@ -1,25 +1,37 @@
 ﻿import { encryptPassword, sha256 } from "../utils";
 import * as EmailValidator from 'email-validator';
-var HttpStatus = require('http-status-codes');
+import * as HttpStatus from 'http-status-codes';
 import { MongoClient, Db } from "mongodb";
 import { Configuration } from "../conf";
-var crypto = require('crypto');
-const nodemailer = require('nodemailer');
-import * as express from "express";
+import * as crypto from 'crypto';
+import * as nodemailer from 'nodemailer';
+import { Request, Response } from "express";
 
-export function registrationHandler(req, res, db: Db) {
+export function registrationHandler(req: Request, res: Response, db: Db) {
     if (validate(req, res) === false)
         return;
-    isEmailInDb(req, res, db, () => isUserInDb(req, res, db, () => insertInDb(req, res, db)));
-    
+  
+    isEmailUnusedInDb(req, res, db, () => {
+        isUserInDb(req, res, db, () => {
+            insertInDb(req, res, db);
+        });
+    });
 }
 
-function validate(req, res) {
+/**
+ * Validate input data.
+ * Computation should go forward if this function returns true.
+ * Error messages are sent to the users when this function returns false.
+ * @param req
+ * @param res
+ */
+function validate(req: Request, res: Response) {
     if (req.body.password === undefined || req.body.password.length < 8) {
         res.send(JSON.stringify({ feedback: "password too short" }));
         return false;
     }
-    if (req.body.username) {
+    //trimming has to be done before checking the length
+    if (req.body.username) { 
         req.body.username = req.body.username.trim();
     }
     if (req.body.username === undefined || req.body.username.length < 1) {
@@ -33,12 +45,19 @@ function validate(req, res) {
         res.send(JSON.stringify({ feedback: "email not valid" }));
         return false;
     }
-
     return true;
 }
 
-//callback called if email is not in db
-function isEmailInDb(req, res, db, callback) {
+
+/**
+ * Make sure e-mail address is not already used.
+ * Callback is called if email is not in db
+ * @param req
+ * @param res
+ * @param db
+ * @param callback
+ */
+function isEmailUnusedInDb(req: Request, res: Response, db: Db, callback) {
     db.collection("users").find({ email: req.body.email }).toArray((err, result) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,8 +72,16 @@ function isEmailInDb(req, res, db, callback) {
     });
 }
 
-function isUserInDb(req, res, db, callback) {
-    db.collection("users").find({ email: req.body.username }).toArray((err, result) => {
+/**
+ * Checks the username req.body.username is not present in the db
+ * Callback called if not present
+ * @param req
+ * @param res
+ * @param db
+ * @param callback
+ */
+function isUserInDb(req: Request, res: Response, db: Db, callback) {
+    db.collection("users").find({ username: req.body.username }).toArray((err, result) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return;
@@ -66,10 +93,16 @@ function isUserInDb(req, res, db, callback) {
         }
         callback();
     });
-    
 }
 
-function insertInDb(req: express.Request, res, db) {
+/**
+ * Inserts the user in the database.
+ * Password will be hashed with a random salt
+ * @param req
+ * @param res
+ * @param db
+ */
+function insertInDb(req: Request, res: Response, db: Db) {
     var newUser = req.body;
     newUser.salt = crypto.randomBytes(4).toString('base64');
     newUser.activated = false;
@@ -79,35 +112,40 @@ function insertInDb(req: express.Request, res, db) {
     db.collection("users").insert(newUser, (err, result) => {
         if (err) {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            return
+            console.log(err);
+            return;
         }
+        console.log(result);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ feedback: "ok" }));
 
-        let transporter = nodemailer.createTransport(Configuration.conf.email);
+        sendEmail(newUser, req);
+    });
+}
 
-        let hostname = req.hostname;
-        let protocol = req.protocol;
-        let port = req.socket.localPort;
+var transporter = nodemailer.createTransport(Configuration.conf.email);
+function sendEmail(newUser, req: Request) {
+    let hostname = req.hostname;
+    let protocol = req.protocol;
+    let port = req.socket.localPort;
 
-        console.log(newUser.activationToken);
-        let mailContent = "Per verificare il suo indirizzo e-mail, clicchi \
+    console.log(newUser.activationToken);
+    let mailContent = "Per verificare il suo indirizzo e-mail, clicchi \
 <a href='"+ protocol + "://" + hostname + ":" + port + "/validate?token=" + encodeURIComponent(newUser.activationToken) + "'>qui</a>";
 
-        // setup email data with unicode symbols
-        let mailOptions = {
-            from: Configuration.conf.email.auth.user,
-            to: newUser.email, // list of receivers
-            subject: 'Registrazione orientamento unibo', // Subject line
-            html: mailContent // html body
-        };
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: Configuration.conf.email.auth.user,
+        to: newUser.email, // list of receivers
+        subject: 'Registrazione orientamento unibo', // Subject line
+        html: mailContent // html body
+    };
 
-        // send mail with defined transport object
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                return console.log(error);
-            }
-            console.log('Message %s sent: %s', info.messageId, info.response);
-        });
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
     });
 }

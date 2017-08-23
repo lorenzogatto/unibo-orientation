@@ -10,7 +10,7 @@
   </section>
   <section style="margin-top:1rem">
     <ng-container *ngFor="let school of courseGroups">
-      <button class="school accordion" (click)="accordionClick($event);">
+      <button class="school accordion" (click)="accordionClick($event);" aria-label="Clicca per estendere">
         <span class="toggle" [style.color]="school.color"></span>
         Gruppo {{school.groupName | lowercase}}
       </button>
