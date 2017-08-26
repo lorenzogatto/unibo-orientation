@@ -1,6 +1,6 @@
 ﻿<ng-container *ngIf="user">
-  <h2>Benvenuto, {{user.username}}</h2>
+  <h2 tabindex="0">Benvenuto, {{user.username}}</h2>
 
-  Sei registrato con il seguente indirizzo e-mail: {{user.email}}<br />
+  <p tabindex="0">Sei registrato con il seguente indirizzo e-mail: {{user.email}}</p>
 </ng-container>
 <button (click)="logout()">Logout</button>

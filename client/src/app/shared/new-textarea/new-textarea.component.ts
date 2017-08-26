@@ -16,6 +16,7 @@ export class NewTextareaComponent{
     @Input() identifier: string;
     @Input() maxlength: number;
     @Input() isRequired: boolean;
+    @Input() placeholder: string;
 
     constructor() {
     }

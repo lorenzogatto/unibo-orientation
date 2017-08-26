@@ -8,9 +8,31 @@ body, html {
   font-family: Arial, sans-serif;
 }
 
+a {
+  /*
+    //to override default firefox behaviour 
+    //https://stackoverflow.com/questions/4285970/css-firefox-how-to-deactivate-the-dotted-border-firefox-click-indicator
+  */
+  outline: none;
+}
+
 * {
   box-sizing: border-box;
+
+  body:not(.show-focus-outlines) &:focus {//otherwise every element with tabindex would get an outline
+    outline: none;
+  }
+
+  body.show-focus-outlines &:focus:not(input) {
+    outline: 0.0625rem dotted #212121; //for FF, IE and Edge
+    outline: 0.3125rem auto -webkit-focus-ring-color; //5px with default browser color, for Chrome, Safari and Opera
+  }
 }
+
+body.show-focus-outlines .accordion:focus {
+  background-color: #ddd;
+}
+
 
 .flex-center {
   display: flex;
@@ -60,13 +82,6 @@ body, html {
   }
 }
 
-a {
-  /*
-    //to override default firefox behaviour 
-    //https://stackoverflow.com/questions/4285970/css-firefox-how-to-deactivate-the-dotted-border-firefox-click-indicator
-  */
-  outline: none;
-}
 a {
   &:link {
     color: blue;

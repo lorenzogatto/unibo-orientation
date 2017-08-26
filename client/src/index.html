@@ -16,8 +16,19 @@
   <link rel="stylesheet" type="text/css" href="assets/toastr-personalization.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet">
 
-</head >
-      <body>
-        <app-root></app-root>
-      </body>
-</html >
+</head>
+<body>
+  <app-root></app-root>
+  <script>//https://stackoverflow.com/questions/23705055/input-effect-on-keyboard-tab-focus-but-not-on-click
+document.addEventListener('keydown', function (e) {
+      if (e.keyCode === 9) {
+        $('body').addClass('show-focus-outlines');
+      }
+    });
+
+    document.addEventListener('mousedown', function (e) {
+      $('body').removeClass('show-focus-outlines');
+    });
+  </script>
+</body>
+</html>

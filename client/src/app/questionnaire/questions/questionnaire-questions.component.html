@@ -1,9 +1,9 @@
-﻿<h2>Questionario</h2>
+﻿<h2 tabindex="0">Questionario</h2>
 <sk-circle *ngIf="!questions && !loadingError"></sk-circle>
 <span *ngIf="loadingError" class="error">Errore nel caricamento del questionario, riprovare più tardi!</span>
 
 <form *ngIf="questions" (submit)="onSubmit()" ngNativeValidate name="questionnaire-form">
-  <div *ngFor="let question of questions" class="row question-row">
+  <div *ngFor="let question of questions" class="row question-row" tabindex="0">
     <div class="col-md-10">{{question.question}}</div>
     <div class="col-md-2">
       <label><input type="radio" name="{{question.question}}" value="1" required> Sì</label>

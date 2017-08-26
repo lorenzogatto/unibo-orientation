@@ -113,4 +113,26 @@ export class ForumDetailComponent implements OnInit {
                 console.log(err);
         })
     }
+
+    /**
+     * When the user triggers with the keyboard an event equivalent to a mouse click,
+     * that is it clicks space or enter on an element
+     * @param callback
+     */
+    onKeyboardClick(event: KeyboardEvent, command, parameter) {
+        console.log(event);
+        let KEY_SPACE = 32;
+        let KEY_ENTER = 13;
+        if (event.keyCode != KEY_SPACE && event.keyCode != KEY_ENTER)
+            return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (command === 'copy') {
+            this.onCopy();
+        } else if (command === "delete") {
+            this.onDelete(parameter);
+        } else if (command === 'chevron') {
+            this.chevronToggle(event);
+        }
+    }
 }

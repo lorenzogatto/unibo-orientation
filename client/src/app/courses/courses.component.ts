@@ -3,11 +3,12 @@ import { CourseService } from "./course.service";
 import { Course } from "./course";
 import { School } from "./school";
 import * as $ from 'jquery';
+import { accordionToggle } from "../shared/accordion/accordion";
 
 @Component({
     selector: 'courses',
     templateUrl: './courses.component.html',
-    styleUrls: ['courses.component.scss'],
+    styleUrls: ['../shared/accordion/accordion.scss'],
 })
 export class CoursesComponent implements OnInit {
 
@@ -29,12 +30,6 @@ export class CoursesComponent implements OnInit {
             });
     }
     accordionClick(event: Event) {
-        console.log(event);
-        let button: any = event.target;
-        //console.log(button);
-        button.classList.toggle("active");
-        var panel = button.nextElementSibling;
-        var jPanel: any = $(panel)
-        jPanel.slideToggle();
+        accordionToggle(event);
     }
 }

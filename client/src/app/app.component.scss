@@ -1,4 +1,5 @@
 ﻿$nav-bar-height: 2.5rem !global;
+
 .fixed-top-nav {
   $nav-bar-padding: 0.3rem;
   display: -webkit-flex;
@@ -45,11 +46,13 @@
         top: - $border-thickness;
       }
     }
-    //it does not work on firefox http://caniuse.com/#feat=css-media-interaction
-    @media (hover: hover) {
-      &:hover {
-        background-color: #d23732;
-      }
+
+    &:hover, &:focus {
+      background-color: #d23732;
+    }
+
+    &:focus:not(.active) {
+      outline: none;
     }
 
     &.active {

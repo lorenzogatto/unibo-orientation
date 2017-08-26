@@ -5,11 +5,12 @@ import { QuestionnaireService } from "../questionnaire.service";
 import { CourseService } from "../../courses/course.service";
 import { CoursesGroup } from "../../shared/CoursesGroup";
 import * as $ from 'jquery';
+import { accordionToggle } from "../../shared/accordion/accordion";
 
 @Component({
     selector: 'questionnaire-result',
     templateUrl: 'questionnaire-result.component.html',
-    styleUrls: ['../../courses/courses.component.scss', '../../shared/forms.scss']
+    styleUrls: ['../../shared/accordion/accordion.scss', '../../shared/forms.scss']
 })
 export class QuestionnaireResultComponent implements OnInit {
     courseGroups: CoursesGroup[];
@@ -41,13 +42,6 @@ export class QuestionnaireResultComponent implements OnInit {
     }
 
     accordionClick(event: Event) {
-        console.log(event);
-        let button: any = event.target;
-        button.classList.toggle("active");
-        var panel = button.nextElementSibling;
-        var jPanel: any = $(panel)
-        jPanel.slideToggle();
+        accordionToggle(event);
     }
-
-
 }

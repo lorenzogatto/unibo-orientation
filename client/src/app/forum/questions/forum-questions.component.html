@@ -2,8 +2,8 @@
   <input type="text" #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder="Cerca..." class="input col-xs-12 col-md-10" style="margin-top:0.5rem" />
   <button routerLink="/forum/ask" class="input col-xs-12 col-md-2" style="margin-top: 0.5rem">Chiedi</button>
 </div>
-<h3 *ngIf="!currentQueryString">Domande</h3>
-<h3 *ngIf="currentQueryString">Domande per: {{currentQueryString}}</h3>
+<h3 *ngIf="!currentQueryString" tabindex="0">Domande</h3>
+<h3 *ngIf="currentQueryString" tabindex="0">Domande per: {{currentQueryString}}</h3>
 
 <sk-circle *ngIf="showedQuestions === undefined && !loadingError"></sk-circle>
 <span *ngIf="loadingError" class="error">Errore nel caricamento delle domande, riprovare più tardi!</span>

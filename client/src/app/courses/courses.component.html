@@ -1,4 +1,4 @@
-﻿<h2>Lista dei corsi di studio dell'Università di Bologna</h2>
+﻿<h2 tabindex="0">Lista dei corsi di studio dell'Università di Bologna</h2>
 <sk-circle *ngIf="!schools && !loadingError"></sk-circle>
 <span *ngIf="loadingError" class="error">Errore nel caricamento dei corsi, riprovare più tardi!</span>
 <section>
@@ -9,7 +9,7 @@
     </button>
     <div class="panel">
       <ng-container *ngFor="let course of school.courses">
-        <button class="accordion" (click)="accordionClick($event);">
+        <button class="accordion" (click)="accordionClick($event);" [class.focusable]="true">
           <span class="toggle" [style.color]="school.color"></span>
           {{course.courseName}}
         </button>

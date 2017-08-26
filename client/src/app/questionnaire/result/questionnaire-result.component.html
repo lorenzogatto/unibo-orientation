@@ -1,10 +1,10 @@
-﻿<h2>Risultato del questionario</h2>
+﻿<h2 tabindex="0">Risultato del questionario</h2>
 
 <sk-circle *ngIf="!courseGroups && !loadingError"></sk-circle>
 <span *ngIf="loadingError" class="error">Errore nel caricamento del questionario, riprovare più tardi!</span>
 
 <ng-container *ngIf="courseGroups">
-  <section>
+  <section tabindex="0">
     I corsi universitari sono stati suddivisi in gruppi di granularità più fine rispetto
     alle scuole. Questi sono i 3 gruppi in cui pensiamo tu possa dare il tuo meglio!
   </section>

@@ -11,7 +11,14 @@ import { Injectable } from "@angular/core";
 export class AuthenticationService {
     private registrationUrl = 'api/user/register';
     private loginUrl = 'api/user/login';
-    constructor(private http: Http) { }
+    private storage;
+    constructor(private http: Http) {
+        //with some versions of IE localStorage.setItem happens to be a string
+        //https://stackoverflow.com/questions/21155137/javascript-localstorage-object-broken-in-ie11-on-windows-7
+        if (localStorage && typeof localStorage.setItem === "function")
+            this.storage = localStorage;
+        else this.storage = sessionStorage;
+    }
 
     /**
      * Register a new user
@@ -49,9 +56,9 @@ export class AuthenticationService {
                 if (res.feedback === "ok") {
                     let token = res.token;
                     let user = res.user;
-                    console.log(user);
-                    localStorage.setItem("token", token);
-                    localStorage.setItem("user", JSON.stringify(user));
+                    //console.log(user);
+                    this.storage.setItem("token", token);
+                    this.storage.setItem("user", JSON.stringify(user));
                 }
                 return response;
             });
@@ -62,16 +69,16 @@ export class AuthenticationService {
      * It is needed to authenticate in some pages by putting it in 'x-access-token' header.
      */
     getLoginToken(): string {
-        return localStorage.getItem("token");
+        return this.storage.getItem("token");
     }
 
     getUser(): any {
-        return JSON.parse(localStorage.getItem("user"));
+        return JSON.parse(this.storage.getItem("user"));
     }
 
     logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        this.storage.removeItem("token");
+        this.storage.removeItem("user");
     }
 
     isLoggedIn(): boolean {

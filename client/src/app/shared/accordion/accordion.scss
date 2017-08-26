@@ -15,12 +15,22 @@
     font-size: 1.05rem;
   }
 
-  &.active, &:hover {
+  &.school > .toggle:before {
+    margin-right: 0.5rem;
+  }
+
+  &.active {
     background-color: #ddd;
   }
 
-  & > .toggle {
-    color: #777;
+  @media (hover:hover) {
+    &:hover {
+      background-color: #ddd;
+    }
+  }
+
+  &.active > .toggle:before {
+    content: "\2212";
   }
 
   & > .toggle:before {
@@ -33,23 +43,16 @@
     text-shadow: 0.05rem 0 0 #000, 0 -0.05rem 0 #000, 0 0.05rem 0 #000, -0.05rem 0 0 #000;
   }
 
-  &.school > .toggle:before {
-    margin-right: 0.5rem;
-  }
-
-
-  &.active > .toggle:before {
-    content: "\2212";
+  & > .toggle {
+    color: #777;
   }
 }
 
 div.panel {
-    padding: 0 0 0 1rem;
-    background-color: white;
-    //max-height: 0;
-    display: none;
-    overflow: hidden;
-    //transition: max-height 0.5s ease-out;
+  padding: 0 0 0 1rem;
+  background-color: white;
+  display: none;
+  overflow: hidden;
 }
 
 div.panel.course-info {
