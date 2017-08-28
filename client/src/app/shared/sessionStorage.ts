@@ -1,4 +1,8 @@
-﻿export class SessionStorage {
+﻿/**
+ * An alternative session storage, because session storage would not work
+ * in iOS private navigation
+ */
+export class SessionStorage {
     private data = {};
     setItem(key, val) {
         return this.data[key] = String(val);
