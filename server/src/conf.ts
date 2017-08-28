@@ -19,6 +19,14 @@ export class Configuration {
             console.error("Error loading password JWT secret (JWTsecret) in configuration file");
             process.exit(1);
         }
+        if (Configuration.conf.port === undefined) {
+            console.error("Error loading port (port) in configuration file");
+            process.exit(1);
+        }
+        if (Configuration.conf.nat_external_port === undefined) {
+            console.error("Error loading NAT external port (nat_external_port) in configuration file");
+            process.exit(1);
+        }
         if (Configuration.conf.email === undefined) {
             console.error("Error loading email in configuration file");
             process.exit(1);
