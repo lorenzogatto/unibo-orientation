@@ -106,8 +106,8 @@ console.log("Connecting to MongoDB...");
 MongoClient.connect(databaseConnectionString).then((dbx) => {
     console.log("MongoDB connected!");
     db = dbx;
-    app.listen(3000, function () {
-        console.log("Example app listening on port 3000!");
+    app.listen(Configuration.getPort(), function () {
+        console.log("Example app listening on port " + Configuration.getPort() + "!");
     });
 }).catch(() => {
     console.log("Error connecting to MongoDB!");

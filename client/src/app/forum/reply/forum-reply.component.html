@@ -1,5 +1,6 @@
 ﻿<div class="col-xs-12">
-  <a href="#" (click)="accordion($event)" class="reply-link">Reply</a>
+  <a routerLink="/user/login" *ngIf="!authenticationService.isLoggedIn()" class="reply-link" style="">Rispondi</a>
+  <a href="#" *ngIf="authenticationService.isLoggedIn()" (click)="accordion($event)" class="reply-link">Rispondi</a>
   <div class="reply-accordion">
     <form (submit)="onSubmit($event)">
       <new-textarea [name]="'reply'" [isRequired]="true" [maxlength]="200" [placeholder]="'Risposta...'" aria-></new-textarea>

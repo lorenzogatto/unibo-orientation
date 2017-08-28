@@ -1,0 +1,11 @@
+﻿#map {
+  height: 20rem;
+  width: 100%;
+  touch-action: none;
+}
+
+@media only screen and (min-width: 40em) {
+  #map {
+    height: 25rem;
+  }
+}

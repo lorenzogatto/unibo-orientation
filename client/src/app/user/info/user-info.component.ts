@@ -12,7 +12,7 @@ export class UserInfoComponent implements OnInit {
     constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
     ngOnInit(): void {
-        if (!this.authenticationService.getLoginToken()) {
+        if (!this.authenticationService.isLoggedIn()) {
             this.router.navigateByUrl("/user/login");
         }
         this.user = this.authenticationService.getUser()

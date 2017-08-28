@@ -5,7 +5,7 @@ declare var GeolocationMarker: any;
 @Component({
     selector: 'contacts',
     templateUrl: 'contacts.component.html',
-    styleUrls: []
+    styleUrls: ['contacts.component.scss']
 })
 export class ContactsComponent implements OnInit {
     private currentPositionMarker;

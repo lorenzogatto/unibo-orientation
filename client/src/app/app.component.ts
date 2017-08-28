@@ -39,8 +39,8 @@ export class AppComponent {
     swipe(event) {
         //alert(event.pointerType);
         console.log(event);
+        if (event.pointerType === "mouse") return;
         if (this.fromMap(event)) return;
-        console.log(event);
         let index = urlsMatch.findIndex((e) => this.router.url.startsWith(e));
         if (index === -1) {
             console.log("Url not found in array");

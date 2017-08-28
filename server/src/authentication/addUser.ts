@@ -123,11 +123,12 @@ function insertInDb(req: Request, res: Response, db: Db) {
     });
 }
 
-var transporter = nodemailer.createTransport(Configuration.conf.email);
+var transporter = nodemailer.createTransport(Configuration.getEmail());
 function sendEmail(newUser, req: Request) {
     let hostname = req.hostname;
     let protocol = req.protocol;
-    let port = req.socket.localPort;
+    let port = Configuration.getNatPort();
+    //If a NAT is present, it should be the port that the client connects to (usually 80) regardless of the local port (req.socket.localPort)
 
     console.log(newUser.activationToken);
     let mailContent = "Per verificare il suo indirizzo e-mail, clicchi \
@@ -135,7 +136,7 @@ function sendEmail(newUser, req: Request) {
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: Configuration.conf.email.auth.user,
+        from: Configuration.getEmail().auth.user,
         to: newUser.email, // list of receivers
         subject: 'Registrazione orientamento unibo', // Subject line
         html: mailContent // html body

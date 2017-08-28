@@ -1,6 +1,7 @@
 ﻿import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from "@angular/core";
+import { SessionStorage } from "../shared/sessionStorage";
 
 /**
  * Service to manage authentication.
@@ -12,12 +13,32 @@ export class AuthenticationService {
     private registrationUrl = 'api/user/register';
     private loginUrl = 'api/user/login';
     private storage;
+
     constructor(private http: Http) {
-        //with some versions of IE localStorage.setItem happens to be a string
-        //https://stackoverflow.com/questions/21155137/javascript-localstorage-object-broken-in-ie11-on-windows-7
-        if (localStorage && typeof localStorage.setItem === "function")
+        let supported = this.isLocalStorageNameSupported();
+        //console.log(supported);
+        if (supported)
             this.storage = localStorage;
-        else this.storage = sessionStorage;
+        else {
+            this.storage = new SessionStorage();
+        }
+    }
+
+    /**
+     * This spots two main problems:
+     * with some versions of IE localStorage.setItem happens to be a string
+     * https://stackoverflow.com/questions/21155137/javascript-localstorage-object-broken-in-ie11-on-windows-7
+     * Plus localStorage and sessionStorage do not work on iOS private mode
+     */
+    private isLocalStorageNameSupported() {
+        var testKey = 'test', storage = window.localStorage;
+        try {
+            storage.setItem(testKey, '1');
+            storage.removeItem(testKey);
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 
     /**
@@ -39,7 +60,6 @@ export class AuthenticationService {
         return this.http.post(this.registrationUrl, JSON.stringify(newUser), options).toPromise();
     }
 
-
     login(email, password) {
         let user = {
             email: email,
@@ -53,10 +73,14 @@ export class AuthenticationService {
         return this.http.put(this.loginUrl, JSON.stringify(user), options).toPromise()
             .then(response => {
                 var res = response.json();
+                //alert(typeof localStorage);
+                //alert(typeof localStorage.setItem);
                 if (res.feedback === "ok") {
                     let token = res.token;
                     let user = res.user;
                     //console.log(user);
+                    //console.log(token);
+                    //console.log(token.length);
                     this.storage.setItem("token", token);
                     this.storage.setItem("user", JSON.stringify(user));
                 }
@@ -82,6 +106,6 @@ export class AuthenticationService {
     }
 
     isLoggedIn(): boolean {
-        return this.getLoginToken()? true : false;
+        return this.getLoginToken() ? true : false;
     }
 }

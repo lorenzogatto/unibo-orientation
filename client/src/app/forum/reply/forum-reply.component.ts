@@ -14,7 +14,7 @@ export class ForumReplyComponent{
 
     @Input() question;
 
-    constructor(private forumService: ForumService, private router: Router, private authenticationService: AuthenticationService) { }
+    constructor(private forumService: ForumService, private router: Router, public authenticationService: AuthenticationService) { }
 
     accordion(event: Event) {
         console.log(event);

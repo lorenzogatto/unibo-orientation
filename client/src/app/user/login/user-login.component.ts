@@ -40,7 +40,7 @@ export class UserLoginComponent implements OnInit {
         this.error = "";
 
         this.authenticationService.login(this.email, this.password).then(response => {
-            console.log(response);
+            //console.log(response);
             let res = response.json();
             var feedback: string = res.feedback;
             if (feedback === "ok") {

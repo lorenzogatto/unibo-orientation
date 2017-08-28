@@ -1,14 +1,14 @@
 import fs = require('fs');
 var prompt = require('prompt-sync')();
 
+var configurationFile = 'c:/unibo-orientation/configuration.json';
 
 export class Configuration {
-    static conf: any;
-    //static initialized = false;
+    private static conf: any;
 
     static inizialize() {
         console.log("Reading configuration");
-        let conf = fs.readFileSync('c:/unibo-orientation/configuration.json', 'utf8');
+        let conf = fs.readFileSync(configurationFile, 'utf8');
         Configuration.conf = JSON.parse(conf);
         //console.log(Configuration.conf);
         if (Configuration.conf.databaseConnectionString === undefined) {
@@ -36,6 +36,15 @@ export class Configuration {
 
     static getJWTSecret() {
         return Configuration.conf.JWTsecret;
+    }
+    static getPort() {
+        return Configuration.conf.port;
+    }
+    static getNatPort() {
+        return Configuration.conf.nat_external_port;
+    }
+    static getEmail() {
+        return Configuration.conf.email;
     }
 }
 Configuration.inizialize();

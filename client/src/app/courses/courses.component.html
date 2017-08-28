@@ -9,7 +9,7 @@
     </button>
     <div class="panel">
       <ng-container *ngFor="let course of school.courses">
-        <button class="accordion" (click)="accordionClick($event);" [class.focusable]="true">
+        <button class="accordion" (click)="accordionClick($event);" [class.focusable]="docu">
           <span class="toggle" [style.color]="school.color"></span>
           {{course.courseName}}
         </button>
